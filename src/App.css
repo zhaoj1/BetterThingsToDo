@@ -1,5 +1,10 @@
+html, body{
+  height: 100%;
+}
+
 .App {
   text-align: center;
+  margin:auto;
 }
 
 .App-logo {
@@ -19,4 +24,72 @@
 
 .App-link {
   color: #09d3ac;
+}
+
+#mapid { 
+  height: 100%; 
+  width: 100%;
+}
+
+.wrapper {
+  /* position:absolute;
+  top:50%;
+  left:50%;
+  width:500px;  
+  height:500px; 
+  margin-left:-250px;
+  margin-top:-250px;  */
+
+  position: absolute;
+  top:  50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+
+}
+
+.input{
+  width: 250px;
+}
+
+.inputForm{
+  margin:auto;
+  text-align: center;
+  border-style: solid;
+  padding: 20px;
+}
+
+.searchResultsMajorDiv{
+  margin:auto;
+  /* text-align: center; */
+  border-style: solid;
+  padding: 20px;
+  height: 90%;
+  width: 70%;
+  margin-top: 10px;
+  display: flex;
+}
+
+.searchResults{
+  margin:auto;
+  text-align: center;
+  border-style: solid;
+  padding: 20px;
+  height: 30%;
+  width: 40%;
+  margin-top: 10px;
+}
+
+.resultLineItem{
+  margin:auto;
+  text-align: center;
+  border-style: solid;
+  padding: 20px;
+  width: 90%;
+  height: 70px;;
+  margin-top: 10px;
+}
+
+.searchResultsBtns{
+  margin-bottom:0;
+  float: bottom;
 }
