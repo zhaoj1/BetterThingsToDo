@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import SearchBox from './SearchBox'
 import SearchResults from './SearchResults'
+import ReturnedQueries from './ReturnedQueries';
 
 var NodeGeocoder = require('node-geocoder');
  
@@ -17,6 +18,7 @@ export default class MainContainer extends Component{
         this.handleAddressInputChange = this.handleAddressInputChange.bind(this)
         this.handleAddressSubmit = this.handleAddressSubmit.bind(this)
         this.handleBackBtn = this.handleBackBtn.bind(this)
+        this.setRecommendations = this.setRecommendations.bind(this)
     
         this.state = {
           firstAddress: null,
@@ -24,16 +26,7 @@ export default class MainContainer extends Component{
           secondAddress: null,
           secondSearchResults: [],
           page: 'search',
-          // firstAddress: {
-          //   longitude: 40.7243,
-          //   latitude: -74.0018,
-          // },
-          // secondAddress: {
-          //   longitude: 40.7243,
-          //   latitude: -74.0018,
-          // },
-          // query: 'coffee',
-          // midpoint: null
+          recommendedVenues: []
         }
       }
     
@@ -52,21 +45,27 @@ export default class MainContainer extends Component{
       handleAddressSubmit(event){
         event.preventDefault();
     
-        fetch(`https://api.opencagedata.com/geocode/v1/json?q=${this.state.firstAddress}&key=` + process.env.REACT_APP_OCD_API_KEY)
+        fetch(`https://api.opencagedata.com/geocode/v1/json?q=${this.state.firstAddress}&key=` + process.env.REACT_APP_OCD_API_KEY + '&limit=5')
         .then(resp => resp.json())
         .then(data => 
           this.setState({
-            firstSearchResults: data.results // annotations/geometry/ {lat/lng}
+            firstSearchResults: data.results // .annotations.geometry. {lat/lng}
           })  
         )
+        .catch(error => {
+          {throw(error)}
+        })
 
-        fetch(`https://api.opencagedata.com/geocode/v1/json?q=${this.state.secondAddress}&key=` + process.env.REACT_APP_OCD_API_KEY)
+        fetch(`https://api.opencagedata.com/geocode/v1/json?q=${this.state.secondAddress}&key=` + process.env.REACT_APP_OCD_API_KEY + '&limit=5')
         .then(resp => resp.json())
         .then(data => 
           this.setState({
-            secondSearchResults: data.results // annotations/geometry/ {lat/lng}
+            secondSearchResults: data.results // annotations.geometry. {lat/lng}
           })  
         )
+        .catch(error => {
+          throw(error)
+        })
 
         this.setState({
           page: 'results'
@@ -79,11 +78,18 @@ export default class MainContainer extends Component{
       //   .then(resp => resp.json())
       //   .then(console.log)
       // }
+
+      setRecommendations = (queryResults) => {
+        this.setState({
+          recommendedVenues: queryResults,
+          page: 'suggestions'
+        })
+      }
     
     render() {
-      // console.log(this.state)
+      // console.log(this.state.recommendedVenues)
         return(
-          <>
+          <div className='MainContainer'>
             {this.state.page === 'search' ? 
               < SearchBox 
                 handleAddressInputChange={this.handleAddressInputChange} 
@@ -95,13 +101,21 @@ export default class MainContainer extends Component{
                   firstSearchResults={this.state.firstSearchResults}
                   secondSearchResults={this.state.secondSearchResults}
                   handleBackBtn={this.handleBackBtn}
+                  setRecommendations={this.setRecommendations}
+                />
+              :
+              this.state.page === 'suggestions' ?
+                <ReturnedQueries 
+                  recommendedVenues={this.state.recommendedVenues} 
+                  handleBackBtn={this.handleBackBtn}
+                  currentUser={this.props.currentUser}
                 />
               :
               null
             }
             
                 
-          </>
+          </div>
 
         )
     }
