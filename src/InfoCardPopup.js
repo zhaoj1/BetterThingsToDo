@@ -4,7 +4,7 @@ import foursquare from './assets/powered-by-foursquare-blue.png'
 export default class InfoCardPopup extends Component{
 
     render() {
-        console.log(this.props.selectedLineItem)
+        // console.log(this.props)
         return(
             <div className='popup' >
                 <div className='wrapper'>
@@ -85,7 +85,12 @@ export default class InfoCardPopup extends Component{
                                         </div>
                                     </div>
                                     <br></br>
-                                    {this.props.currentUser ? <button className='buttons' onClick={() => this.props.handleSaveVenue(this.props.selectedLineItem.venue.id)}>Save</button> : null}
+                                    {this.props.currentUser ? 
+                                        this.props.list == 'recommended' ?
+                                            <button className='buttons' onClick={() => this.props.handleSaveVenue(this.props.selectedLineItem.venue)}>Save</button> 
+                                            : null
+                                        :null
+                                    }
                                     <button className='buttons' onClick={this.props.handleBackBtn}>Back</button><br></br>
                                     <img src={foursquare} width='200px' style={{'margin-top':10}} />
                                 </div>

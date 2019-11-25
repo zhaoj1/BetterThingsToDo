@@ -19,6 +19,8 @@ export default class MainContainer extends Component{
         this.handleAddressSubmit = this.handleAddressSubmit.bind(this)
         this.handleBackBtn = this.handleBackBtn.bind(this)
         this.setRecommendations = this.setRecommendations.bind(this)
+        // this.setErrorMessage = this.setErrorMessage.bind(this)
+        // this.removeErrorMessage = this.removeErrorMessage.bind(this)
     
         this.state = {
           firstAddress: null,
@@ -26,7 +28,9 @@ export default class MainContainer extends Component{
           secondAddress: null,
           secondSearchResults: [],
           page: 'search',
-          recommendedVenues: []
+          recommendedVenues: [],
+          loading: true,
+          // errorMessage: null
         }
       }
     
@@ -49,7 +53,8 @@ export default class MainContainer extends Component{
         .then(resp => resp.json())
         .then(data => 
           this.setState({
-            firstSearchResults: data.results // .annotations.geometry. {lat/lng}
+            firstSearchResults: data.results, // .annotations.geometry. {lat/lng}
+            loading: false
           })  
         )
         .catch(error => {
@@ -60,7 +65,8 @@ export default class MainContainer extends Component{
         .then(resp => resp.json())
         .then(data => 
           this.setState({
-            secondSearchResults: data.results // annotations.geometry. {lat/lng}
+            secondSearchResults: data.results, // annotations.geometry. {lat/lng}
+            loading: false
           })  
         )
         .catch(error => {
@@ -85,9 +91,22 @@ export default class MainContainer extends Component{
           page: 'suggestions'
         })
       }
+
+      // setErrorMessage = (error) => {
+      //   this.setState({
+      //     errorMessage: error
+      //   })
+      // }
+
+      // removeErrorMessage = () => {
+      //   this.setState({
+      //     errorMessage: null
+      //   })
+      // }
     
     render() {
-      // console.log(this.state.recommendedVenues)
+      // console.log(this.state.firstSearchResults)
+      // console.log(this.state.secondSearchResults)
         return(
           <div className='MainContainer'>
             {this.state.page === 'search' ? 
@@ -102,6 +121,11 @@ export default class MainContainer extends Component{
                   secondSearchResults={this.state.secondSearchResults}
                   handleBackBtn={this.handleBackBtn}
                   setRecommendations={this.setRecommendations}
+                  loading={this.state.loading}
+                  handleErrors={this.props.handleErrors}
+                  // errorMessage={this.state.errorMessage}
+                  // setErrorMessage={this.setErrorMessage}
+                  // removeErrorMessage={this.removeErrorMessage}
                 />
               :
               this.state.page === 'suggestions' ?
@@ -109,6 +133,10 @@ export default class MainContainer extends Component{
                   recommendedVenues={this.state.recommendedVenues} 
                   handleBackBtn={this.handleBackBtn}
                   currentUser={this.props.currentUser}
+                  handleErrors={this.props.handleErrors}
+                  // errorMessage={this.state.errorMessage}
+                  // setErrorMessage={this.setErrorMessage}
+                  // removeErrorMessage={this.removeErrorMessage}
                 />
               :
               null

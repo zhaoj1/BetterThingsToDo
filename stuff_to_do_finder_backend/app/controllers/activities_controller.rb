@@ -29,7 +29,7 @@ class ActivitiesController < ApplicationController
     private
 
     def activityParams
-        params.require(:activity).permit(:user_id, :venue_API_id)
+        params.require(:activity).permit(:user_id, :venue_name)
     end
 
 end

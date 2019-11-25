@@ -9,7 +9,7 @@ function NavBox(props){
             <Link to='/main' className='logo'>Logo Placeholder</Link>
             {props.currentUser?
                 <>
-                    <div className='linkTo' ><Button variant='contained' disabled >{props.currentUser.username}</Button></div>
+                    <Link to='/profile' className='linkTo' ><Button variant='contained' color='primary' >{props.currentUser.username}</Button></Link>
                     <div className='linkTo' ><Button variant='contained' color='link' onClick={props.logout}>Logout</Button></div>
                 </>
                 :

@@ -12,7 +12,7 @@ export default class ErrorPopup extends Component{
                         {this.props.errorMessage.map(error => 
                             <p className='error'>{error}</p>
                         )}
-                        <button className='buttons' onClick={this.props.handleBackBtn}>Back</button>
+                        <button className='buttons' onClick={this.props.handleErrorBackBtn}>Back</button>
                     </div>
                 </div>
         )

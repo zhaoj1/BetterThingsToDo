@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import QueryLineItem from './QueryLineItem'
-import InfoCard from './InfoCard'
 import InfoCardPopup from './InfoCardPopup'
 import SavedVenuesLineItem from './SavedVenuesLineItem'
 import foursquare from './assets/powered-by-foursquare-blue.png'
@@ -15,6 +14,7 @@ export default class ReturnedQueries extends Component{
         this.state = {
             selectedLineItem: null,
             selectedLineItemInfo: null,
+            list: null,
             savedVenues: null
         }
     }
@@ -23,9 +23,7 @@ export default class ReturnedQueries extends Component{
         this.setState({
             selectedLineItem: null
         })
-
         this.fetchSavedVenues()
-        
     }
 
     fetchSavedVenues = () => {
@@ -36,10 +34,10 @@ export default class ReturnedQueries extends Component{
                 savedVenues: data
             })
         )
-        // .then(console.log)
     }
 
-    handleSaveVenue = (venueId) => {
+    handleSaveVenue = (venue) => {
+        // console.log(venue)
         fetch(`http://localhost:3000/activities`, {
             method: "POST",
             headers: {
@@ -48,31 +46,33 @@ export default class ReturnedQueries extends Component{
             },
             body: JSON.stringify({
                 user_id: this.props.currentUser.id,
-                venue_API_id: venueId
+                // venue_API_id: venue.id,
+                venue_name: venue.name
             })
-          })
-            .then(res => res.json())
-            .then(
-                this.setState({
-                    selectedLineItem: null
-                })
-            )
+        })
+        .then(
+            this.setState({
+                selectedLineItem: null
+            })
+        )
+        .then(() => this.fetchSavedVenues())  
     }
 
     fetchVenueInfo = () => { //quoted out to save on API calls
-        fetch(`https://api.foursquare.com/v2/venues/${this.state.selectedLineItem.venue.id}?&client_id=` + process.env.REACT_APP_CLIENTID + '&client_secret=' + process.env.REACT_APP_CLIENTSECRET +'&v=20180323')
-        .then(resp => resp.json())
-        .then(data => this.setState({
-            selectedLineItemInfo: data.response.venue
-        }))
-        .catch(error => {
-            throw(error)
-          })
+        // fetch(`https://api.foursquare.com/v2/venues/${this.state.selectedLineItem.venue.id}?&client_id=` + process.env.REACT_APP_CLIENTID + '&client_secret=' + process.env.REACT_APP_CLIENTSECRET +'&v=20180323')
+        // .then(resp => resp.json())
+        // .then(data => this.setState({
+        //     selectedLineItemInfo: data.response.venue
+        // }))
+        // .catch(error => {
+        //     throw(error)
+        //   })
     }
 
-    handleQuerySelect = (event) => {
+    handleQuerySelect = (event, list) => {
         this.setState({
-            selectedLineItem: this.props.recommendedVenues.find(venue => venue.venue.name === event.target.innerText)
+            selectedLineItem: this.props.recommendedVenues.find(venue => venue.venue.name === event.target.innerText),
+            list: list
         })
         setTimeout(()=> this.fetchVenueInfo(), 200)
     }
@@ -85,8 +85,9 @@ export default class ReturnedQueries extends Component{
     }
 
     render() {
-        console.log(this.state.savedVenues)
+        // console.log(this.state.savedVenues)
         // console.log(this.props.currentUser)
+        // console.log(this.state)
         return(
             <>
                 {/* {this.state.selectedLineItem?
@@ -103,30 +104,45 @@ export default class ReturnedQueries extends Component{
                     </div>
                 } */}
 
-                <div className='queriesPage'>
-                    {this.props.currentUser ? 
-                    <div className='savedVenues'>
-                        {this.state.savedVenues ? 
-                            this.state.savedVenues.map(venue =>
-                                <SavedVenuesLineItem venue={venue} recommendedVenues={this.props.recommendedVenues} selectedLineItem={this.state.selectedLineItem} handleQuerySelect={this.handleQuerySelect} />    
-                            )
-                            : 
-                            null}
-                    </div>
-                    :
-                    null
-                    }   
+                    <div className='queriesPage'>
+                        <div className='savedRecommendedLists'>
+                            {this.props.currentUser ? 
+                                this.state.savedVenues ? 
+                                    <div className='savedVenues'>
+                                        <h1>Saved Venues</h1>
+                                        {this.state.savedVenues.map(venue =>
+                                            <SavedVenuesLineItem 
+                                                venue={venue.venue_name} 
+                                                selectedLineItem={this.state.selectedLineItem} 
+                                                handleQuerySelect={this.handleQuerySelect} 
+                                            />    
+                                        )}
+                                    
+                                    </div>
+                                : 
+                                null
+                            :
+                            null
+                            }   
 
-                    <div className='recommendedList'>
-                        {this.props.recommendedVenues.map(venue => 
-                            <QueryLineItem venue={venue} recommendedVenues={this.props.recommendedVenues} selectedLineItem={this.state.selectedLineItem} handleQuerySelect={this.handleQuerySelect} />
-                        )}
+                            <div className='recommendedList'>
+                                <h1>Venues</h1>
+                                {this.props.recommendedVenues.map(venue => 
+                                    <QueryLineItem 
+                                        venue={venue} 
+                                        recommendedVenues={this.props.recommendedVenues} 
+                                        selectedLineItem={this.state.selectedLineItem} 
+                                        handleQuerySelect={this.handleQuerySelect} 
+                                    />
+                                )}
+                            </div>
+                        </div>
+                        <br></br>
+                        <div className='queryPageBtn'>
+                            <button className='buttons' onClick={this.props.handleBackBtn}>Back</button><br></br>
+                            <img src={foursquare} width='200px' />
+                        </div>
                     </div>
-                    <div className='queryPageBtn'>
-                        <button className='buttons' onClick={this.props.handleBackBtn}>Back</button><br></br>
-                        <img src={foursquare} width='200px' />
-                    </div>
-                </div>
 
                 {this.state.selectedLineItem?
                     <InfoCardPopup 
@@ -135,6 +151,7 @@ export default class ReturnedQueries extends Component{
                         handleBackBtn={this.handleBackBtn} 
                         handleSaveVenue={this.handleSaveVenue} 
                         currentUser={this.props.currentUser}
+                        list={this.state.list}
                     />
                     :
                     null

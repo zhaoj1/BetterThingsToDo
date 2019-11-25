@@ -8,10 +8,6 @@ body{
   background-size: contain;
 }
 
-body::before{
-
-}
-
 .contents{
   height: 100%;
 }
@@ -51,6 +47,7 @@ body::before{
   top:  50%;
   left: 50%;
   transform: translate(-50%,-50%);
+  width:100%
 }
 
 .input{
@@ -267,7 +264,7 @@ input[type=submit].buttons {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
-
+  flex-direction:column;
 }
 
 .savedVenues{
@@ -300,7 +297,6 @@ input[type=submit].buttons {
   background-color:rgba(245,245,220, 0.95);
   margin-bottom: 15px;
   float: right;
-  
 }
 
 .queryLineItem{
@@ -314,6 +310,11 @@ input[type=submit].buttons {
   border-color:  rgb(150,100,75);
   border-radius:15px;
   background-color:rgba(245,245,220, 0.95);
+}
+
+.savedRecommendedLists{
+  display: flex;
+  flex-direction: row;
 }
 
 .queryPageBtn{
@@ -458,7 +459,6 @@ input[type=submit].buttons {
   height: 15%;
   padding: 0px 25px 25px 25px;
   /* min-height:auto;  */
-  flex-direction: column;
   text-align:center;
   border-style: solid;
   border-radius:15px;
@@ -466,3 +466,45 @@ input[type=submit].buttons {
   font-weight:bold;
 }
 
+.profilePage{
+  margin:auto;
+  border-style: solid;
+  padding: 20px;
+  height: 90%;
+  width: 50%;
+  margin-top: 100px;
+  text-align: center;
+  border-color:  rgb(150,100,75);
+  border-radius:15px;
+  background-color:rgba(245,245,220, 0.95);
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  flex-direction:column;
+}
+
+.profile{
+  margin:auto;
+  text-align: center;
+  border-style: solid;
+  padding: 30px;
+  height: 30%;
+  width: 30%;
+  margin-top: 10px;
+  border-radius:15px;
+  background-color:rgba(245,245,220, 0.95);
+  margin-bottom: 15px;
+}
+
+.profileVenues{
+  margin:auto;
+  text-align: center;
+  border-style: solid;
+  padding: 30px;
+  height: 30%;
+  width: 30%;
+  margin-top: 10px;
+  border-radius:15px;
+  background-color:rgba(245,245,220, 0.95);
+  margin-bottom: 15px;
+}

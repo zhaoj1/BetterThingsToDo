@@ -3,6 +3,7 @@ import MainContainer from './MainContainer'
 import { Route, Switch } from 'react-router-dom';
 import Signup from './Signup'
 import Login from './Login'
+import Profile from './Profile'
 import ErrorPopup from './ErrorPopup'
 
 export default class Contents extends React.Component{
@@ -14,7 +15,7 @@ export default class Contents extends React.Component{
             errorMessage: ''
         }
         this.handleErrors = this.handleErrors.bind(this)
-        this.handleBackBtn = this.handleBackBtn.bind(this)
+        this.handleErrorBackBtn = this.handleErrorBackBtn.bind(this)
     }
 
     handleErrors = (error) => {
@@ -24,7 +25,7 @@ export default class Contents extends React.Component{
         })
       }
 
-      handleBackBtn = () => {
+      handleErrorBackBtn = () => {
         this.setState({
             popup: false,
             errorMessage: ''
@@ -66,10 +67,18 @@ export default class Contents extends React.Component{
                         /> 
                         } 
                     />
+                    <Route exact path='/profile' 
+                        render={(routerProps) => 
+                        <Profile 
+                            {...routerProps} 
+                            currentUser={this.props.currentUser} 
+                        /> 
+                        } 
+                    />
                     </Switch>
                 </div>
                 {this.state.popup ?
-                    <ErrorPopup errorMessage={this.state.errorMessage} handleBackBtn={this.handleBackBtn} />
+                    <ErrorPopup errorMessage={this.state.errorMessage} handleErrorBackBtn={this.handleErrorBackBtn} />
                     :
                     null
                 }
