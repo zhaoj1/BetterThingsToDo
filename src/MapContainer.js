@@ -1,85 +1,107 @@
 import React from 'react';
-import 'leaflet/dist/leaflet.css';
-import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css';
-import * as L from 'leaflet';
-import 'leaflet-defaulticon-compatibility';
-import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
-import './leaflet.css'
- 
-const provider = new OpenStreetMapProvider();
+import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 
-const searchControl = new GeoSearchControl({
-    provider: provider,
-    autoClose: true,
-    showMarker: true,
-    keepResult: true,
-    retainZoomLevel: true,
-});
+const mapsrc = "https://www.google.com/maps/embed/v1/view?&zoom=13&center=40.771699, -73.832559&zoom=8&key=" + process.env.REACT_APP_GOOGLE
+const mapStyles = {
+    width: '100%',
+    height: '100%',
+};
 
-// const searchControl2 = new GeoSearchControl({
-//     provider: provider,
-//     autoClose: true,
-//     showMarker: true,
-//     keepResult: true,
-//     retainZoomLevel: true,
-// });
+let bounds = []
 
-// const bounds = [
-//     [40.705245 + .0015, -74.013915 + .0015],
-//     [40.705245 - .0015, -74.013915 - .0015]
-// ]
-
-export default class MapContainer extends React.Component{
+// export default class MapContainer extends React.Component{
+class MapContainer extends React.Component{
     
     state = {
-        longitude: null,
-        latitude: null,
-        chosenLocations: []
+        showingInfoWindow: false,
+        activeMarker: {},
+        selectedPlace: {}
     }
 
-    componentDidMount(){
-        this.map = L.map('mapid', {
-            center: [40.705245, -74.013915],
-            zoom: 15,
-            layers: [
-                L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
-                    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                }).addTo(this.map)
-            ]
-        })
+    setBounds = () => {
+        this.props.savedVenues.map(venue => 
+            bounds.push({
+                lat: venue.latitude, lng: venue.longitude
+            })
+        )
+    }
 
-        L.marker([40.705245, -74.013915]).addTo(this.map);
-        L.circle([40.705245, -74.013915],{
-            color: 'red',
-            fillcolor: '#f03',
-            fillOpacity: 0.5,
-            radius: 500
-        }).addTo(this.map)
-        
-
-        // L.rectangle(bounds, {color: '#ff7800', weight:1}).addTo(this.map)
-
-        this.map.addControl(searchControl)
-        
-        this.map.on('geosearch/showlocation', function (result) {
-            console.log(result.location.x, result.location.y) 
+    onMarkerClick = (props, marker, e) =>
+        this.setState({
+            selectedPlace: props,
+            activeMarker: marker,
+            showingInfoWindow: true
         });
-        
-    }   
 
-    componentDidUpdate() {
-        this.map.current.leafletElement.invalidateSize(true);
-    }
+    onClose = props => {
+        if (this.state.showingInfoWindow) {
+            this.setState({
+                showingInfoWindow: false,
+                activeMarker: null
+            });
+        }
+    };
 
-
-
-    render() {
-        // setTimeout(() => { this.map.invalidateSize(true)}, 800);
+    render(){
+        this.setBounds();
         return(
-            <div id="mapid"></div>
-            // <iframe width="600" height="450" frameborder="0" style={{border:0}}
-            //     src="https://www.google.com/maps/embed/v1/undefined?origin=...&q=...&destination=...&center=...&zoom=...&key=AIzaSyDov9KfZKjI8rtKRrc-s9B0fubyJXGcW1Q" allowfullscreen>
-            // </iframe>
+            <div className='wrapper' style={{'height':'100%'}}>
+                <div className='mapContainer'>
+                    {/* <iframe 
+                        className='map'
+                        width="100%" 
+                        height="100%" 
+                        frameborder="0" 
+                        src={mapsrc}
+                        allowfullscreen>
+                    </iframe> */}
+
+                    <Map
+                        google={this.props.google}
+                        zoom={15}
+                        style={mapStyles}
+                        // initialCenter={{lat: 40.7052529, lng: -74.0146175}}
+                        bounds={bounds}
+                    >
+                    {/* <Marker
+                        onClick={this.onMarkerClick}
+                        name={'Flatiron School'}
+                        position={{lat: 40.7052529, lng: -74.0146175}}
+                    /> */}
+                    {this.props.savedVenues.length !== 0?
+                        this.props.savedVenues.map(venue =>
+                            <Marker
+                                onClick={this.onMarkerClick}
+                                name={venue.venue_name}
+                                position={{lat: venue.latitude, lng: venue.longitude}}
+                            />
+                        )
+                        :
+                        null
+                    }
+
+                    <InfoWindow
+                        marker={this.state.activeMarker}
+                        visible={this.state.showingInfoWindow}
+                        onClose={this.onClose}
+                    >
+                        <div>
+                            <h4>{this.state.selectedPlace.name}</h4>
+                        </div>
+                    </InfoWindow>
+                    </Map>
+                </div>
+            </div>
         )
     }
 }
+
+// export default GoogleApiWrapper({
+//     // apiKey: process.env.REACT_APP_GOOGLE
+//   })(MapContainer);
+
+export default GoogleApiWrapper(
+    (props) => ({
+        // apiKey: process.env.REACT_APP_GOOGLE
+    })
+)(MapContainer)

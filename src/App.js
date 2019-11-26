@@ -2,29 +2,42 @@ import React from 'react';
 import NavBox from './NavBox'
 import Contents from './Contents'
 import LogoutPopup from './LogoutPopup'
+import MapContainer from './MapContainer'
 
 export default class App extends React.Component{
 
-  state = {
-    currentUser: null
+  constructor(){
+    super();
+
+    this.state = {
+      currentUser: null
+    }
+
+    this.logoutMsg = React.createRef();
+  
   }
 
   setUser = (user) => {
     this.setState({
-      currentUser: user
+      currentUser: user,
+      savedVenues: null
     })
   }
 
   logout = () => {
-    this.props.history.push('./main')
     this.setState({
       currentUser: null,
       logoutPopup: true
     })
-
+    this.props.history.push('./main')
     // setTimeout(() => alert('Successfully Logged Out'), 200)
-
   }  
+
+  componentDidUpdate(){
+    if(this.logoutMsg.current !== null){
+      this.logoutMsg.current.focus();   
+    }
+  }
 
   handleLogoutBackBtn = () => {
     this.setState({
@@ -43,7 +56,7 @@ export default class App extends React.Component{
   //     })
   //     .then(resp => resp.json())
   //     .then(response => {
-  //       console.log(response)
+  //       // console.log(response.user)
   //       this.setState({
   //         currentUser: response.user
   //       })
@@ -59,38 +72,9 @@ export default class App extends React.Component{
           <NavBox currentUser={this.state.currentUser} logout={this.logout} />
         </div>
         <div className='contents' >
-          <Contents currentUser={this.state.currentUser} setUser={this.setUser} />
-          {/* <div className='contents' >
-            <Switch>
-              <Route exact path='/' />
-              <Route exact path='/signup' 
-                render={(routerProps) => 
-                  <Signup 
-                    {...routerProps} 
-                    setUser={this.setUser} 
-                  /> 
-                } 
-              />
-              <Route exact path='/login' 
-                render={(routerProps) => 
-                  <Login 
-                    {...routerProps} 
-                    setUser={this.setUser} 
-                  /> 
-                } 
-              />
-              <Route exact path='/main' 
-                render={(routerProps) => 
-                  <MainContainer 
-                    {...routerProps} 
-                    currentUser={this.state.currentUser} 
-                  /> 
-                } 
-              />
-            </Switch>
-          </div> */}
+          <Contents currentUser={this.state.currentUser} setUser={this.setUser} logoutMsg={this.logoutMsg} />
           {this.state.logoutPopup?
-            <LogoutPopup errorMessage={this.state.errorMessage} handleBackBtn={this.handleLogoutBackBtn} />
+            <LogoutPopup handleBackBtn={this.handleLogoutBackBtn} logoutMsg={this.logoutMsg} />
             :
             null
           }

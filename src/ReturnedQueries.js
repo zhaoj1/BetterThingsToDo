@@ -3,60 +3,63 @@ import QueryLineItem from './QueryLineItem'
 import InfoCardPopup from './InfoCardPopup'
 import SavedVenuesLineItem from './SavedVenuesLineItem'
 import foursquare from './assets/powered-by-foursquare-blue.png'
+import MapContainer from './MapContainer'
 
 export default class ReturnedQueries extends Component{
     
     constructor(){
         super();
-        this.handleQuerySelect = this.handleQuerySelect.bind(this)
-        this.handleBackBtn = this.handleBackBtn.bind(this)
+        this.handleQuerySelect = this.handleQuerySelect.bind(this);
+        this.handleBackBtn = this.handleBackBtn.bind(this);
+        this.handleSaveBtn = this.handleSaveBtn.bind(this);
+        this.infoCardBackBtn = React.createRef();
 
         this.state = {
             selectedLineItem: null,
             selectedLineItemInfo: null,
             list: null,
-            savedVenues: null
+            // savedVenues: null
         }
     }
 
-    componentDidMount(){
-        this.setState({
-            selectedLineItem: null
-        })
-        this.fetchSavedVenues()
-    }
+    // componentDidMount(){
+    //     this.setState({
+    //         selectedLineItem: null
+    //     })
+    //     this.fetchSavedVenues()
+    // }
 
-    fetchSavedVenues = () => {
-        fetch(`http://localhost:3000/activities`)
-        .then(resp => resp.json())
-        .then(data => 
-            this.setState({
-                savedVenues: data
-            })
-        )
-    }
+    // fetchSavedVenues = () => {
+    //     fetch(`http://localhost:3000/activities`)
+    //     .then(resp => resp.json())
+    //     .then(data => 
+    //         this.setState({
+    //             savedVenues: data
+    //         })
+    //     )
+    // }
 
-    handleSaveVenue = (venue) => {
-        // console.log(venue)
-        fetch(`http://localhost:3000/activities`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              'Accept': "application/json"
-            },
-            body: JSON.stringify({
-                user_id: this.props.currentUser.id,
-                // venue_API_id: venue.id,
-                venue_name: venue.name
-            })
-        })
-        .then(
-            this.setState({
-                selectedLineItem: null
-            })
-        )
-        .then(() => this.fetchSavedVenues())  
-    }
+    // handleSaveVenue = (venue) => {
+    //     // console.log(venue)
+    //     fetch(`http://localhost:3000/activities`, {
+    //         method: "POST",
+    //         headers: {
+    //           "Content-Type": "application/json",
+    //           'Accept': "application/json"
+    //         },
+    //         body: JSON.stringify({
+    //             user_id: this.props.currentUser.id,
+    //             // venue_API_id: venue.id,
+    //             venue_name: venue.name
+    //         })
+    //     })
+    //     .then(
+    //         this.setState({
+    //             selectedLineItem: null
+    //         })
+    //     )
+    //     .then(() => this.fetchSavedVenues())  
+    // }
 
     fetchVenueInfo = () => { //quoted out to save on API calls
         // fetch(`https://api.foursquare.com/v2/venues/${this.state.selectedLineItem.venue.id}?&client_id=` + process.env.REACT_APP_CLIENTID + '&client_secret=' + process.env.REACT_APP_CLIENTSECRET +'&v=20180323')
@@ -68,6 +71,12 @@ export default class ReturnedQueries extends Component{
         //     throw(error)
         //   })
     }
+
+    componentDidUpdate(){
+        if(this.infoCardBackBtn.current !== null){
+          this.infoCardBackBtn.current.focus();   
+        }
+      }
 
     handleQuerySelect = (event, list) => {
         this.setState({
@@ -82,6 +91,20 @@ export default class ReturnedQueries extends Component{
             selectedLineItem: null,
             selectedLineItemInfo: null
         })
+    }
+
+    handleSaveBtn = () => {
+        this.props.handleSaveVenue(this.state.selectedLineItem.venue)
+        this.handleBackBtn()
+        // this.setState({
+        //     selectedLineItem: null,
+        //     selectedLineItemInfo: null
+        // })
+    }
+
+    handleDeleteBtn = () => {
+        this.props.handleDeleteVenue(this.state.selectedLineItem)
+        this.handleBackBtn()
     }
 
     render() {
@@ -107,10 +130,10 @@ export default class ReturnedQueries extends Component{
                     <div className='queriesPage'>
                         <div className='savedRecommendedLists'>
                             {this.props.currentUser ? 
-                                this.state.savedVenues ? 
+                                this.props.savedVenues ? 
                                     <div className='savedVenues'>
                                         <h1>Saved Venues</h1>
-                                        {this.state.savedVenues.map(venue =>
+                                        {this.props.savedVenues.map(venue =>
                                             <SavedVenuesLineItem 
                                                 venue={venue.venue_name} 
                                                 selectedLineItem={this.state.selectedLineItem} 
@@ -139,6 +162,7 @@ export default class ReturnedQueries extends Component{
                         </div>
                         <br></br>
                         <div className='queryPageBtn'>
+                            <button className='buttons' onClick={this.props.toggleMap} >Map View</button>
                             <button className='buttons' onClick={this.props.handleBackBtn}>Back</button><br></br>
                             <img src={foursquare} width='200px' />
                         </div>
@@ -152,6 +176,9 @@ export default class ReturnedQueries extends Component{
                         handleSaveVenue={this.handleSaveVenue} 
                         currentUser={this.props.currentUser}
                         list={this.state.list}
+                        handleSaveBtn={this.handleSaveBtn}
+                        infoCardBackBtn={this.infoCardBackBtn}
+                        handleDeleteBtn={this.handleDeleteBtn}
                     />
                     :
                     null

@@ -24,12 +24,19 @@ class ActivitiesController < ApplicationController
         activity = Activity.find(params[:id])
         render json: activity, status: :ok
 
-      end
+    end
+
+    def destroy
+
+        activity = Activity.find(params[:id])
+        activity.destroy
+        
+    end
 
     private
 
     def activityParams
-        params.require(:activity).permit(:user_id, :venue_name)
+        params.require(:activity).permit(:user_id, :venue_name, :venue_api_id, :latitude, :longitude)
     end
 
 end

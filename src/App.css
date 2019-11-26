@@ -10,6 +10,7 @@ body{
 
 .contents{
   height: 100%;
+  /* margin-top: 57px; */
 }
 
 .App {
@@ -89,7 +90,7 @@ body{
   text-align: center;
   border-style: solid;
   border-color: rgb(150,100,75);
-  width:90%;
+  width:40%;
   border-radius:15px;
   background-color:rgba(245,245,220, 0.95);
   /* padding: 0 20px 20px 20px; */
@@ -173,6 +174,10 @@ input[type=submit].buttons {
   border-color: rgb(150,100,75)
 }
 
+.buttons:focus{
+  outline:none;
+}
+
 .resultLineItem{
   margin:auto;
   text-align: center;
@@ -217,6 +222,7 @@ input[type=submit].buttons {
   border-color:  rgb(150,100,75);
   /* border-radius:15px; */
   background-color:rgb(245,245,220);
+  z-index: 1;
 
   /* border-style: solid;
   position: fixed;
@@ -326,8 +332,10 @@ input[type=submit].buttons {
   text-align: center;
   border-style: solid;
   padding: 20px;
-  height: 700px;
+  height: 650px;
   width: 1000px;
+  margin-top:10px;
+  margin-bottom:10px;
   border-color:  rgb(150,100,75);
   border-radius:15px;
   background-color:rgba(245,245,220, 0.95);
@@ -338,7 +346,7 @@ input[type=submit].buttons {
   margin-bottom:15px;
   text-align: center;
   border-style: solid;
-  padding: 20px;
+  padding: 15px;
   border-radius:15px;
   background-color:rgba(245,245,220, 0.95);
   font-weight: bold;
@@ -346,10 +354,10 @@ input[type=submit].buttons {
 
 .venueNameLocation{
   margin:auto;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   text-align: center;
   border-style: solid;
-  padding: 15px;
+  padding: 10px;
   border-color:  rgb(150,100,75);
   border-radius:15px;
   background-color:rgba(245,245,220, 0.95);
@@ -361,7 +369,7 @@ input[type=submit].buttons {
   margin-bottom: 5px;
   text-align: center;
   border-style: solid;
-  padding: 10px;
+  padding: 8px;
   border-color:  rgb(150,100,75);
   border-radius:15px;
   background-color:rgba(245,245,220, 0.95);
@@ -372,7 +380,7 @@ input[type=submit].buttons {
   margin-bottom: 5px;
   text-align: center;
   border-style: solid;
-  padding: 10px;
+  padding: 8px;
   border-color:  rgb(150,100,75);
   border-radius:15px;
   background-color:rgba(245,245,220, 0.95);
@@ -383,7 +391,7 @@ input[type=submit].buttons {
   margin:auto;
   text-align: center;
   border-style: solid;
-  padding: 10px;
+  padding: 8px;
   border-color:  rgb(150,100,75);
   border-radius:15px;
   background-color:rgba(245,245,220, 0.95);
@@ -393,7 +401,7 @@ input[type=submit].buttons {
   position: fixed;  
   width: 100%;  
   height: 100%;  
-  top: 0;  
+  top: 120px;  
   left: 0;  
   right: 0;  
   bottom: 0;  
@@ -402,13 +410,14 @@ input[type=submit].buttons {
 }  
 
 .popup\_inner {  
-  position: absolute;  
+  position: fixed;  
   left: 25%;  
   right: 25%;  
   top: 25%;  
   bottom: 25%;  
   margin: auto;  
   border-radius: 20px;  
+  height:100%;
 }
 
 .error_popup_inner{
@@ -470,9 +479,10 @@ input[type=submit].buttons {
   margin:auto;
   border-style: solid;
   padding: 20px;
-  height: 90%;
-  width: 50%;
-  margin-top: 100px;
+  height: 690%;
+  width: 65%;
+  margin-top: 20px;
+  margin-bottom: 20px;
   text-align: center;
   border-color:  rgb(150,100,75);
   border-radius:15px;
@@ -480,31 +490,62 @@ input[type=submit].buttons {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
-  flex-direction:column;
 }
 
 .profile{
   margin:auto;
   text-align: center;
   border-style: solid;
-  padding: 30px;
-  height: 30%;
-  width: 30%;
+  padding: 20px;
+  width:25%;
   margin-top: 10px;
   border-radius:15px;
   background-color:rgba(245,245,220, 0.95);
   margin-bottom: 15px;
+  flex: left;
+  height:240px;
 }
 
 .profileVenues{
   margin:auto;
   text-align: center;
   border-style: solid;
-  padding: 30px;
+  padding: 2px;
   height: 30%;
-  width: 30%;
+  width: 60%;
   margin-top: 10px;
   border-radius:15px;
   background-color:rgba(245,245,220, 0.95);
   margin-bottom: 15px;
+  flex:right;
+}
+
+.profileVenuesLineItem{
+  margin:auto;
+  text-align: center;
+  border-style: solid;
+  /* padding: 10px; */
+  padding-top:4px;
+  width: 80%;
+  height: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-color:  rgb(150,100,75);
+  border-radius:15px;
+  background-color:rgba(245,245,220, 0.95);
+}
+
+.profileVenuesHeader{
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.map{
+  margin:auto;
+}
+
+.mapContainer{
+  height:100%;
+  width:100%;
+  margin-top:4%;
 }

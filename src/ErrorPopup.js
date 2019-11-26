@@ -4,7 +4,6 @@ import foursquare from './assets/powered-by-foursquare-blue.png'
 export default class ErrorPopup extends Component{
 
     render() {
-        console.log(this.props.errorMessage)
         return(
                 <div className='popup' >
                     <div className='error_popup_inner'>
@@ -12,7 +11,7 @@ export default class ErrorPopup extends Component{
                         {this.props.errorMessage.map(error => 
                             <p className='error'>{error}</p>
                         )}
-                        <button className='buttons' onClick={this.props.handleErrorBackBtn}>Back</button>
+                        <button className='buttons' onClick={this.props.handleErrorBackBtn} ref={this.props.errorMsgBtn} >Back</button>
                     </div>
                 </div>
         )

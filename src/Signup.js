@@ -39,7 +39,7 @@ export default class Signup extends Component{
                 // console.log(response.errors)
               } else {
                 this.props.setUser(response.user)
-                // localStorage.token = response.token
+                localStorage.token = response.token
                 this.props.history.push('/main')
                 // console.log(localStorage.token)
               }

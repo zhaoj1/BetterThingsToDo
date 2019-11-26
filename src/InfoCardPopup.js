@@ -7,12 +7,12 @@ export default class InfoCardPopup extends Component{
         // console.log(this.props)
         return(
             <div className='popup' >
-                <div className='wrapper'>
+                {/* <div className='wrapper'> */}
                     <div className='popup\_inner'>
                         {!this.props.selectedLineItemInfo === null? //dont forget to remove ( ! )
                             null
                             :
-                            <div className='wrapper'>
+                            // <div className='wrapper'>
                                 <div className='infoCardBorder'>
                                     <div className='infoCard'>
                                         <div className='venueNameLocation'>
@@ -87,17 +87,18 @@ export default class InfoCardPopup extends Component{
                                     <br></br>
                                     {this.props.currentUser ? 
                                         this.props.list == 'recommended' ?
-                                            <button className='buttons' onClick={() => this.props.handleSaveVenue(this.props.selectedLineItem.venue)}>Save</button> 
-                                            : null
+                                            <button className='buttons' onClick={this.props.handleSaveBtn}>Save</button> 
+                                            : 
+                                            <button className='buttons' onClick={this.props.handleDeleteBtn} >Remove from Saved</button> 
                                         :null
                                     }
-                                    <button className='buttons' onClick={this.props.handleBackBtn}>Back</button><br></br>
+                                    <button className='buttons' onClick={this.props.handleBackBtn} ref={this.props.infoCardBackBtn}>Back</button><br></br>
                                     <img src={foursquare} width='200px' style={{'margin-top':10}} />
                                 </div>
-                            </div>
+                            // </div>
                         }
                     </div>
-                </div>
+                {/* </div> */}
             </div>         
         )
     }

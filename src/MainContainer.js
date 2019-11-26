@@ -42,7 +42,12 @@ export default class MainContainer extends Component{
 
       handleBackBtn(event){
         this.setState({
-          page: 'search'
+          firstAddress: null,
+          firstSearchResults: [],
+          secondAddress: null,
+          secondSearchResults: [],
+          page: 'search',
+          recommendedVenues: [],
         })
       }
     
@@ -123,9 +128,6 @@ export default class MainContainer extends Component{
                   setRecommendations={this.setRecommendations}
                   loading={this.state.loading}
                   handleErrors={this.props.handleErrors}
-                  // errorMessage={this.state.errorMessage}
-                  // setErrorMessage={this.setErrorMessage}
-                  // removeErrorMessage={this.removeErrorMessage}
                 />
               :
               this.state.page === 'suggestions' ?
@@ -134,9 +136,10 @@ export default class MainContainer extends Component{
                   handleBackBtn={this.handleBackBtn}
                   currentUser={this.props.currentUser}
                   handleErrors={this.props.handleErrors}
-                  // errorMessage={this.state.errorMessage}
-                  // setErrorMessage={this.setErrorMessage}
-                  // removeErrorMessage={this.removeErrorMessage}
+                  savedVenues={this.props.savedVenues}
+                  handleSaveVenue={this.props.handleSaveVenue}
+                  toggleMap={this.props.toggleMap}
+                  handleDeleteVenue={this.props.handleDeleteVenue}
                 />
               :
               null
