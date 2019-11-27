@@ -2,7 +2,6 @@ import React from 'react';
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 import marker from './assets/markerV2.png'
 
-const mapsrc = "https://www.google.com/maps/embed/v1/view?&zoom=13&center=40.771699, -73.832559&zoom=8&key=" + process.env.REACT_APP_GOOGLE
 const mapStyles = {
     width: '100%',
     height: '100%',
@@ -11,7 +10,7 @@ const mapStyles = {
 let bounds = []
 
 // export default class MapContainer extends React.Component{
-class MapContainer extends React.Component{
+class QueriesMap extends React.Component{
     
     state = {
         showingInfoWindow: false,
@@ -20,9 +19,9 @@ class MapContainer extends React.Component{
     }
 
     setBounds = () => {
-        this.props.savedVenues.map(venue => 
+        this.props.recommendedVenues.map(venue => 
             bounds.push({
-                lat: venue.lat, lng: venue.lng
+                lat: venue.venue.location.lat, lng: venue.venue.location.lng
             })
         )
     }
@@ -61,7 +60,7 @@ class MapContainer extends React.Component{
                         google={this.props.google}
                         zoom={15}
                         style={mapStyles}
-                        initialCenter={{lat: this.props.savedVenues[0].lat, lng: this.props.savedVenues[0].lng}}
+                        initialCenter={{lat: this.props.recommendedVenues[0].venue.location.lat, lng: this.props.recommendedVenues[0].venue.location.lng}}
                         bounds={bounds}
                         ref={this.props.map}
                     >
@@ -70,13 +69,13 @@ class MapContainer extends React.Component{
                         name={'Flatiron School'}
                         position={{lat: 40.7052529, lng: -74.0146175}}
                     /> */}
-                    {this.props.savedVenues.length !== 0?
-                        this.props.savedVenues.map(venue =>
+                    {this.props.recommendedVenues.length !== 0?
+                        this.props.recommendedVenues.map(venue =>
                             <Marker
                                 onClick={this.onMarkerClick}
-                                name={venue.venue_name}
+                                name={venue.venue.name}
                                 icon={marker}
-                                position={{lat: venue.lat, lng: venue.lng}}
+                                position={{lat: venue.venue.location.lat, lng: venue.venue.location.lng}}
                             />
                         )
                         :
@@ -92,7 +91,7 @@ class MapContainer extends React.Component{
                             <h4>{this.state.selectedPlace.name}</h4>
                         </div>
                     </InfoWindow>
-                    <button className='mapBtn' onClick={this.props.toggleMap} >Close Map</button>
+                    <button className='mapBtn' onClick={this.props.toggleRecommendedMap} >Close Map</button>
                     </Map>
                 </div>
             </div>
@@ -108,4 +107,4 @@ export default GoogleApiWrapper(
     (props) => ({
         // apiKey: process.env.REACT_APP_GOOGLE
     })
-)(MapContainer)
+)(QueriesMap)

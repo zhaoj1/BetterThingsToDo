@@ -10,11 +10,19 @@ export default class App extends React.Component{
     super();
 
     this.state = {
-      currentUser: null
+      currentUser: null,
+      toggleNav: false
     }
 
     this.logoutMsg = React.createRef();
+    this.toggleDisableNav = this.toggleDisableNav.bind(this);
   
+  }
+
+  toggleDisableNav = () => {
+    this.setState({
+      toggleNav: !this.state.toggleNav
+    })
   }
 
   setUser = (user) => {
@@ -27,7 +35,8 @@ export default class App extends React.Component{
   logout = () => {
     this.setState({
       currentUser: null,
-      logoutPopup: true
+      logoutPopup: true,
+      toggleNav: !this.state.toggleNav
     })
     this.props.history.push('./main')
     // setTimeout(() => alert('Successfully Logged Out'), 200)
@@ -41,7 +50,8 @@ export default class App extends React.Component{
 
   handleLogoutBackBtn = () => {
     this.setState({
-      logoutPopup:false
+      logoutPopup:false,
+      toggleNav: !this.state.toggleNav
     })
   }
 
@@ -69,10 +79,10 @@ export default class App extends React.Component{
     return(
       <div className='appWindow'>
         <div className='window' >
-          <NavBox currentUser={this.state.currentUser} logout={this.logout} />
+          <NavBox currentUser={this.state.currentUser} logout={this.logout} toggleNav={this.state.toggleNav} />
         </div>
         <div className='contents' >
-          <Contents currentUser={this.state.currentUser} setUser={this.setUser} logoutMsg={this.logoutMsg} />
+          <Contents currentUser={this.state.currentUser} setUser={this.setUser} logoutMsg={this.logoutMsg} toggleDisableNav={this.toggleDisableNav} />
           {this.state.logoutPopup?
             <LogoutPopup handleBackBtn={this.handleLogoutBackBtn} logoutMsg={this.logoutMsg} />
             :

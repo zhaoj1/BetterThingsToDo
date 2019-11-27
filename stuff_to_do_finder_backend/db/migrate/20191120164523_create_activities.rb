@@ -4,8 +4,8 @@ class CreateActivities < ActiveRecord::Migration[6.0]
       t.integer :user_id
       t.string :venue_name
       t.string :venue_api_id
-      t.float :latitude
-      t.float :longitude
+      t.float :lat
+      t.float :lng
 
       t.timestamps
     end

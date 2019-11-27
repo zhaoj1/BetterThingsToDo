@@ -6,7 +6,7 @@ export default class ProfileVenues extends Component{
         return(
             <>
                 <div className='profileVenuesLineItem' onClick={(event) => this.props.handleQuerySelect(event, 'saved')}>
-                    <label>{this.props.venue}</label>
+                    {this.props.venue}
                 </div>         
             </>
         )

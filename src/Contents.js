@@ -22,10 +22,12 @@ export default class Contents extends React.Component{
         this.handleErrors = this.handleErrors.bind(this);
         this.handleErrorBackBtn = this.handleErrorBackBtn.bind(this);
         this.handleSaveVenue = this.handleSaveVenue.bind(this);
-        this.errorMsgBtn = React.createRef();
         this.toggleMap=this.toggleMap.bind(this);
         this.handleDeleteVenue=this.handleDeleteVenue.bind(this);
         this.handleProfileDelete=this.handleProfileDelete.bind(this);
+
+        this.errorMsgBtn = React.createRef();
+        this.map = React.createRef();
     }
 
     handleErrors = (error) => {
@@ -33,6 +35,7 @@ export default class Contents extends React.Component{
           popup: true,
           errorMessage: error
         })
+        this.props.toggleDisableNav()
       }
 
       handleErrorBackBtn = () => {
@@ -40,12 +43,16 @@ export default class Contents extends React.Component{
             popup: false,
             errorMessage: ''
         })
+        this.props.toggleDisableNav()
       }
 
       componentDidMount(){
         if(this.props.currentUser !== null){
             this.fetchSavedVenues()
         }
+        this.setState({
+            showMap:false
+        })
       }
 
       componentDidUpdate(prevProps, prevState){
@@ -56,6 +63,9 @@ export default class Contents extends React.Component{
         }
         if(this.errorMsgBtn.current !== null){
             this.errorMsgBtn.current.focus();
+        }
+        if(this.map.current !== null){
+            this.map.current.focus();
         }
       }
     
@@ -81,19 +91,20 @@ export default class Contents extends React.Component{
                 user_id: this.props.currentUser.id,
                 venue_name: venue.name,
                 venue_api_id: venue.id,
-                latitude: venue.location.lat,
-                longitude: venue.location.lng
+                lat: venue.location.lat,
+                lng: venue.location.lng
             })
         })
         .then(() => this.fetchSavedVenues())  
+        .catch(error => console.log(error))
     }
 
     handleDeleteVenue = (venue) => {
-        console.log(this.state.savedVenues.find(savedVenue => savedVenue.venue_api_id === venue.venue.id && savedVenue.user_id === this.props.currentUser.id).id)
-        // fetch(`http://localhost:3000/activities/${this.state.savedVenues.find(savedVenue => savedVenue.venue_api_id === venue.venue.id && savedVenue.user_id === this.props.currentUser.id).id}`, {
-        //     method: "DELETE"
-        // })
-        // .then(() => this.fetchSavedVenues())  
+        // console.log(this.state.savedVenues.find(savedVenue => savedVenue.venue_api_id === venue.venue.id && savedVenue.user_id === this.props.currentUser.id).id)
+        fetch(`http://localhost:3000/activities/${this.state.savedVenues.find(savedVenue => savedVenue.venue_api_id === venue.venue.id && savedVenue.user_id === this.props.currentUser.id).id}`, {
+            method: "DELETE"
+        })
+        .then(() => this.fetchSavedVenues())  
     }
 
     handleProfileDelete = (selectedVenue) => {
@@ -107,12 +118,17 @@ export default class Contents extends React.Component{
         this.setState({
             showMap: !this.state.showMap
         })
+        this.props.toggleDisableNav()
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+        this.props.toggleDisableNav()
     }
 
     render(){
         // console.log(this.state.errorMessage)
         // console.log(this.props.currentUser)
         // console.log(this.state.savedVenues)
+        // console.log(this.props)
         return(
             <div >
                 <div>
@@ -147,7 +163,9 @@ export default class Contents extends React.Component{
                             handleSaveVenue={this.handleSaveVenue}
                             toggleMap={this.toggleMap}
                             handleDeleteVenue={this.handleDeleteVenue}
-                            toggleMap={this.toggleMap}
+                            map={this.map}
+                            showMap={this.state.showMap}
+                            toggleDisableNav={this.props.toggleDisableNav}
                         /> 
                         } 
                     />
@@ -172,7 +190,7 @@ export default class Contents extends React.Component{
                 }
 
                 {this.state.showMap?
-                    <MapContainer savedVenues={this.state.savedVenues} /> 
+                    <MapContainer savedVenues={this.state.savedVenues} map={this.map} toggleMap={this.toggleMap} /> 
                     :
                     null
                 }

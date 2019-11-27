@@ -7,7 +7,7 @@ class ActivitiesController < ApplicationController
         if activity.save
             render json: activity
         else
-            render json: 'error'
+            render json: 'You already have this venue saved.'
         end
 
     end
@@ -36,7 +36,7 @@ class ActivitiesController < ApplicationController
     private
 
     def activityParams
-        params.require(:activity).permit(:user_id, :venue_name, :venue_api_id, :latitude, :longitude)
+        params.require(:activity).permit(:user_id, :venue_name, :venue_api_id, :lat, :lng)
     end
 
 end

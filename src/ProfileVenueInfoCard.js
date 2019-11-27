@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import foursquare from './assets/powered-by-foursquare-blue.png'
+import foursquare from './assets/powered-by-foursquare-white.png'
 
 export default class ProfileVenueInfoCard extends Component{
 
@@ -15,9 +15,9 @@ export default class ProfileVenueInfoCard extends Component{
                         <div className='infoCardBorder'>
                             <div className='infoCard'>
                                 <div className='venueNameLocation'>
-                                    <a href={`https://foursquare.com/v/${this.props.selectedLineItem.venue_api_id}?ref=` + process.env.REACT_APP_CLIENTID}><h1>{this.props.selectedLineItem.venue_name}</h1></a>
+                                    <h1 className='infoCardVenueName' >{this.props.selectedLineItem.venue_name}</h1>
+                                    <p><a href={`https://foursquare.com/v/${this.props.selectedLineItem.venue_api_id}?ref=` + process.env.REACT_APP_CLIENTID} target='blank' >Click here for more info on venue</a></p>
                                     
-                                    <br></br>
                                     <label>{this.props.selectedLineItemInfo.location.formattedAddress.join(' ')}</label>
                                 </div>
                                 <div className='venueCategRating'>

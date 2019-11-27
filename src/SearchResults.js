@@ -69,6 +69,8 @@ export default class SearchResults extends Component{
             this.calculateMidpoint(this.state.firstSelected.geometry, this.state.secondSelected.geometry);
             setTimeout(()=> this.fetchVenues(), 100);
         }
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
     }
 
     fetchVenues = () => {
@@ -99,55 +101,54 @@ export default class SearchResults extends Component{
         // console.log(this.props.secondSearchResults)
         // console.log(this.state)
         return(
-            <div>
-                    
+            <div>              
                 <div className='searchResultsMajorDiv'>
-                    <div className='searchResults' style={{'float':'left'}}>
-                        <p className='didyoumean'>Did you mean...?</p>
-                        {this.props.loading ?
-
-                            <h1>Loading...</h1>
-                            :
-                            this.props.firstSearchResults.length !== 0 ?
-                                this.props.firstSearchResults.map(result => 
-                                    < ResultLineItem 
-                                        handleResultSelect={this.handleResultSelect} 
-                                        class='firstSelected' 
-                                        result={result} 
-                                        firstSelected={this.state.firstSelected} 
-                                    />
-                                )
-                                :
-                                <p style={{'font-weight':'bold'}}>No results found. Please try again</p>
-                        }
+                    <div className='searchResultsHeader'>
+                        <h3>Please specify addresses:</h3>
                     </div>
-                    <div className='searchResults' style={{'float':'right'}}>
-                        <p className='didyoumean'>Did you mean...?</p>
-                        {this.props.loading ?
-                            <h1>Loading...</h1>
-                            :
-                            this.props.secondSearchResults.length !== 0 ?
-                                this.props.secondSearchResults.map(result => 
-                                    < ResultLineItem 
-                                        handleResultSelect={this.handleResultSelect} 
-                                        class='secondSelected' 
-                                        result={result} 
-                                        firstSelected={this.state.secondSelected} 
-                                    />
-                                )
+                    <div className='searchResultsLists' >
+                        <div className='searchResults' style={{'float':'left'}}>
+                            {this.props.loading ?
+
+                                <h1>Loading...</h1>
                                 :
-                                <p style={{'font-weight':'bold'}}>No results found. Please try again</p>
-                        }
+                                this.props.firstSearchResults.length !== 0 ?
+                                    this.props.firstSearchResults.map(result => 
+                                        < ResultLineItem 
+                                            handleResultSelect={this.handleResultSelect} 
+                                            class='firstSelected' 
+                                            result={result} 
+                                            firstSelected={this.state.firstSelected} 
+                                        />
+                                    )
+                                    :
+                                    <p style={{'font-weight':'bold'}}>No results found. Please try again</p>
+                            }
+                        </div>
+                        <div className='searchResults' style={{'float':'right'}}>
+                            {this.props.loading ?
+                                <h1>Loading...</h1>
+                                :
+                                this.props.secondSearchResults.length !== 0 ?
+                                    this.props.secondSearchResults.map(result => 
+                                        < ResultLineItem 
+                                            handleResultSelect={this.handleResultSelect} 
+                                            class='secondSelected' 
+                                            result={result} 
+                                            firstSelected={this.state.secondSelected} 
+                                        />
+                                    )
+                                    :
+                                    <p style={{'font-weight':'bold'}}>No results found. Please try again</p>
+                            }
+                        </div>
                     </div>
                     <div className='searchResultsBtns'>
                         <button className='buttons' onClick={() => this.handleSubmitQuery(this.state.firstSelected, this.state.secondSelected)} >Continue</button> 
                         <button className='buttons' onClick={this.props.handleBackBtn}>Back</button><br></br>
-                        <label style={{'font-size':10, 'margin-top':10}}>Geodata copyright OpenStreetMap contributors</label>
+                        <label style={{'font-size':10, 'margin-top':10, 'color':'whitesmoke'}}>Geodata copyright OpenStreetMap contributors</label>
                     </div>
                 </div>
-                
-                
-
             </div>
         )
     }

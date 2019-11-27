@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import foursquare from './assets/powered-by-foursquare-blue.png'
+import foursquare from './assets/powered-by-foursquare-white.png'
 
 export default class InfoCardPopup extends Component{
 
@@ -16,9 +16,9 @@ export default class InfoCardPopup extends Component{
                                 <div className='infoCardBorder'>
                                     <div className='infoCard'>
                                         <div className='venueNameLocation'>
-                                            <a href={`https://foursquare.com/v/${this.props.selectedLineItem.venue.id}?ref=` + process.env.REACT_APP_CLIENTID}><h1>{this.props.selectedLineItem.venue.name}</h1></a>
+                                            <h1 className='infoCardVenueName'>{this.props.selectedLineItem.venue.name}</h1>
+                                            <p><a href={`https://foursquare.com/v/${this.props.selectedLineItem.venue.id}?ref=` + process.env.REACT_APP_CLIENTID} target='blank' >Click here for more info on venue</a></p>
                                             
-                                            <br></br>
                                             <label>{this.props.selectedLineItem.venue.location.formattedAddress.join(' ')}</label>
                                         </div>
                                         <div className='venueCategRating'>
@@ -92,7 +92,13 @@ export default class InfoCardPopup extends Component{
                                             <button className='buttons' onClick={this.props.handleDeleteBtn} >Remove from Saved</button> 
                                         :null
                                     }
-                                    <button className='buttons' onClick={this.props.handleBackBtn} ref={this.props.infoCardBackBtn}>Back</button><br></br>
+                                    <button 
+                                        className='buttons' 
+                                        onClick={this.props.handleBackBtn} 
+                                        ref={this.props.infoCardBackBtn}
+                                        style={{'margin':'0 0 5px 0'}}
+                                    >Back</button>
+                                    <br></br>
                                     <img src={foursquare} width='200px' style={{'margin-top':10}} />
                                 </div>
                             // </div>

@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import QueryLineItem from './QueryLineItem'
 import InfoCardPopup from './InfoCardPopup'
 import SavedVenuesLineItem from './SavedVenuesLineItem'
-import foursquare from './assets/powered-by-foursquare-blue.png'
-import MapContainer from './MapContainer'
+import foursquare from './assets/powered-by-foursquare-white.png'
+import QueriesMap from './QueriesMap'
 
 export default class ReturnedQueries extends Component{
     
@@ -12,12 +12,15 @@ export default class ReturnedQueries extends Component{
         this.handleQuerySelect = this.handleQuerySelect.bind(this);
         this.handleBackBtn = this.handleBackBtn.bind(this);
         this.handleSaveBtn = this.handleSaveBtn.bind(this);
+        this.toggleRecommendedMap=this.toggleRecommendedMap.bind(this);
+
         this.infoCardBackBtn = React.createRef();
 
         this.state = {
             selectedLineItem: null,
             selectedLineItemInfo: null,
             list: null,
+            showRecommendedMap:false
             // savedVenues: null
         }
     }
@@ -72,9 +75,18 @@ export default class ReturnedQueries extends Component{
         //   })
     }
 
+    componentDidMount(){
+        this.setState({
+            showRecommendedMap:false
+        })
+    }
+
     componentDidUpdate(){
         if(this.infoCardBackBtn.current !== null){
           this.infoCardBackBtn.current.focus();   
+        }
+        if(this.props.map.current !== null){
+            this.props.map.current.focus();
         }
       }
 
@@ -107,10 +119,22 @@ export default class ReturnedQueries extends Component{
         this.handleBackBtn()
     }
 
+    toggleRecommendedMap=()=>{
+        this.setState({
+            showRecommendedMap: !this.state.showRecommendedMap
+        })
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+        this.props.toggleDisableNav()
+    }
+
     render() {
         // console.log(this.state.savedVenues)
         // console.log(this.props.currentUser)
         // console.log(this.state)
+        // console.log(this.props.recommendedVenues)
+        // console.log(this.props.showMap)
+        // console.log(this.state.showRecommendedMap)
         return(
             <>
                 {/* {this.state.selectedLineItem?
@@ -127,12 +151,12 @@ export default class ReturnedQueries extends Component{
                     </div>
                 } */}
 
-                    <div className='queriesPage'>
+                    <div className='queriesPage' style={this.state.showRecommendedMap || this.props.showMap ? {'display':'none'} : {'display':'block'}}>
                         <div className='savedRecommendedLists'>
                             {this.props.currentUser ? 
                                 this.props.savedVenues ? 
                                     <div className='savedVenues'>
-                                        <h1>Saved Venues</h1>
+                                        <h1 className='venueListsHeaders'>Saved Venues</h1>
                                         {this.props.savedVenues.map(venue =>
                                             <SavedVenuesLineItem 
                                                 venue={venue.venue_name} 
@@ -140,7 +164,7 @@ export default class ReturnedQueries extends Component{
                                                 handleQuerySelect={this.handleQuerySelect} 
                                             />    
                                         )}
-                                    
+                                    <button className='buttons' onClick={this.props.toggleMap} >Map View</button>
                                     </div>
                                 : 
                                 null
@@ -149,7 +173,7 @@ export default class ReturnedQueries extends Component{
                             }   
 
                             <div className='recommendedList'>
-                                <h1>Venues</h1>
+                                <h1 className='venueListsHeaders' >Venues</h1>
                                 {this.props.recommendedVenues.map(venue => 
                                     <QueryLineItem 
                                         venue={venue} 
@@ -158,11 +182,10 @@ export default class ReturnedQueries extends Component{
                                         handleQuerySelect={this.handleQuerySelect} 
                                     />
                                 )}
+                                <button className='buttons' onClick={this.toggleRecommendedMap} >Map View</button>
                             </div>
                         </div>
-                        <br></br>
                         <div className='queryPageBtn'>
-                            <button className='buttons' onClick={this.props.toggleMap} >Map View</button>
                             <button className='buttons' onClick={this.props.handleBackBtn}>Back</button><br></br>
                             <img src={foursquare} width='200px' />
                         </div>
@@ -180,6 +203,11 @@ export default class ReturnedQueries extends Component{
                         infoCardBackBtn={this.infoCardBackBtn}
                         handleDeleteBtn={this.handleDeleteBtn}
                     />
+                    :
+                    null
+                }
+                {this.state.showRecommendedMap ?
+                    <QueriesMap recommendedVenues={this.props.recommendedVenues} toggleRecommendedMap={this.toggleRecommendedMap} map={this.props.map} />
                     :
                     null
                 }
