@@ -59,15 +59,19 @@ export default class Profile extends Component{
                                 <p className='username'>{this.props.currentUser.username}</p>
                                 <img className='profilepic' src='http://sunfieldfarm.org/wp-content/uploads/2014/02/profile-placeholder.png' height='120' width='120' />
                                 <br></br>
-                                <button className='buttons' onClick={this.props.toggleMap} >Map View</button>
+                                {this.props.savedVenues.length === 0 ? 
+                                    null
+                                    :
+                                    <button className='buttons' onClick={this.props.toggleMap} >Map View</button>
+                                }
                             </div>
                         </div>
                         <div className='profileVenues' >
                             <p className='profileVenuesHeader'>Saved Venues</p>
-                            {this.props.savedVenues.length === 0 ?
+                            {this.props.savedVenues.filter(venue => venue.user_id === this.props.currentUser.id).length === 0 ?
                                 null
                                 :
-                                this.props.savedVenues.map(venue => 
+                                this.props.savedVenues.filter(venue => venue.user_id === this.props.currentUser.id).map(venue => 
                                 <ProfileVenues 
                                     venue={venue.venue_name} 
                                     selectedLineItem={this.state.selectedLineItem}

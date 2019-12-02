@@ -7,6 +7,12 @@ body{
   background: url('./assets/bg.png') no-repeat fixed bottom;
   background-size: contain;
   background-color:rgba(0,0,0,0.55);
+  animation: change 12s infinite;
+}
+
+@keyframes change{
+  0% {background-image: url('./assets/bg.png')}
+  50% {background-image: url('./assets/bgTransitionV2.png')}
 }
 
 .contents{
@@ -57,6 +63,9 @@ body{
   margin-bottom: 10px;
   border-color:rgba(0,0,0,0.6);
   padding:4px;
+  font-family: 'Boogaloo', cursive;
+  font-weight:bold;
+  font-size:25px;
 }
 
 .inputForm{
@@ -114,6 +123,7 @@ body{
   border-bottom-left-radius:0;
   border-bottom-right-radius:0;
   background-color:rgb(45, 47, 71);
+  font-family: 'Lacquer', sans-serif;
 }
 
 input[type=submit].buttons {
@@ -146,7 +156,7 @@ input[type=submit].buttons {
   margin:auto;
   text-align: center;
   border-style: solid;
-  padding: 20px;
+  padding: 0 10px 10px 10px;
   height: 30%;
   width: 44.5%;
   margin-top: 10px;
@@ -167,10 +177,13 @@ input[type=submit].buttons {
   font-size: 15px;
   border-radius:10px;
   padding:8px;
-  font-variant: small-caps;
+  /* font-variant: small-caps; */
+  padding-top:10px;
   border-width:2px;
   border-color: rgb(45, 47, 71);
   font-weight:bold;
+  font-family: 'Unica One';
+  font-size:18px;
 }
 
 .buttons:focus{
@@ -195,19 +208,22 @@ input[type=submit].buttons {
   border-radius:10px;
   padding: 0 10px 0 10px;
   background-color:rgba(245,245,245, 0.85);
+  font-family: 'Lacquer', sans-serif;
 }
 
 div.resultLineItem{
   margin:auto;
   text-align: center;
   border-style: solid;
-  padding: 20px;
-  width: 90%;
+  padding: 0 0 15px;
+  width: 99%;
   height: 65px;
   margin-top: 10px;
   border-color:  rgb(45, 47, 71);
   border-radius:10px;
   background-color:rgba(245,245,245, 0.85);
+  font-family: 'Boogaloo';
+  font-size:23px;
 }
 
 .resultLineItem:hover{
@@ -219,14 +235,16 @@ div.resultLineItem{
   margin:auto;
   text-align: center;
   border-style: solid;
-  padding: 20px;
-  width: 90%;
+  padding: 0 0 15px;
+  width: 99%;
   height: 65px;
   margin-top: 10px;
   background-color: rgb(106, 204, 109);
   color: whitesmoke;
   border-color:  rgb(45, 47, 71);
   border-radius:10px;
+  font-family: 'Boogaloo';
+  font-size:23px;
 }
 
 .window{
@@ -250,6 +268,10 @@ div.resultLineItem{
 .navBtns{
   background: linear-gradient(0deg, #5c6bc0  15%, rgb(220, 220, 255) 100%);
   font-weight:bold !important;
+  padding-top:8px !important;
+  top: 45px;
+  font-family: 'Unica One' !important;
+  font-size:20px !important;
 }
 
 .navBtns:hover{
@@ -260,6 +282,9 @@ div.resultLineItem{
   background: linear-gradient(0deg, rgb(25,25,112)  15%, rgb(125,125,212) 100%);
   color:white !important; 
   font-weight:bold !important;
+  top:45px;
+  font-family: 'Unica One' !important;
+  font-size:20px !important;
 }
 
 .profileBtn:hover{
@@ -268,14 +293,14 @@ div.resultLineItem{
 }
 
 .linkTo{
-  margin-top: -2%;
+  margin-top: -2.35%;
   margin-right: 1%;
   float:right;
   text-decoration: none;
 }
 
 .disabledLinkTo{
-  margin-top: -2%;
+  margin-top: -2.35%;
   margin-right: 1%;
   float:right;
   text-decoration: none;
@@ -305,6 +330,7 @@ div.resultLineItem{
 
 .venueListsHeaders{
   margin: 0 0 15px 0;
+  font-family: 'Lacquer', sans-serif;
 }
 
 .savedVenues{
@@ -339,7 +365,7 @@ div.resultLineItem{
   margin:auto;
   text-align: center;
   border-style: solid;
-  padding: 0 0 10px 0;
+  padding: 11px 0 0 0;
   width: 90%;
   height: 50px;
   /* margin-top: 5px; */
@@ -347,6 +373,8 @@ div.resultLineItem{
   border-color:  rgb(45, 47, 71);
   border-radius:10px;
   background-color:rgba(245,245,245, 0.95);
+  font-family: 'Boogaloo', cursive;
+  font-size: 25px;
 }
 
 .queryLineItem:hover{
@@ -390,6 +418,8 @@ div.resultLineItem{
   /* background-color:rgba(245,245,245, 0.75); */
   background-color:rgb(37,33,41);
   font-weight: bold;
+  font-family: 'segoe ui', fantasy;
+  font-size:14px;
 }
 
 .venueNameLocation{
@@ -424,7 +454,7 @@ div.resultLineItem{
   border-color:  rgb(45, 47, 71);
   border-radius:10px;
   background-color:rgba(245,245,245, 0.9);
-  font-weight: normal;
+  font-weight: bold;
 }
 
 .venueInfo{
@@ -469,7 +499,7 @@ div.resultLineItem{
   margin: auto;  
   background-color:rgb(245,175,175);
   width: 35%;
-  height: 25%;
+  height: 28%;
   /* min-height:auto;  */
   flex-direction: column;
   text-align:center;
@@ -482,15 +512,19 @@ div.resultLineItem{
 .error {
   font-size: 25px;
   font-weight:bold;
+  font-family: 'Boogaloo';
+  margin: 0 0 15px 0;
 }
 
 .errorHeading{
   color:white; 
   background-color: red;
   margin-top:0;
-  border-radius:10px;
+  padding-bottom:5px;
+  border-radius:5px;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+  font-family: 'Lacquer', sans-serif;
 }
 
 .logout_popup_inner{
@@ -509,6 +543,12 @@ div.resultLineItem{
   border-radius:10px;
   border-color: rgb(45, 47, 71);
   font-weight:bold;
+}
+
+.logout {
+  font-size: 25px;
+  font-weight:bold;
+  font-family: 'Boogaloo';
 }
 
 .profilePage{
@@ -536,7 +576,8 @@ div.resultLineItem{
   background-color:rgba(245,245,245, 0.95);
   margin-bottom: 15px;
   flex: left;
-  height:235px;
+  height:255px;
+  font-family: 'Unica One';
 }
 
 .profileVenues{
@@ -557,7 +598,8 @@ div.resultLineItem{
   margin:auto;
   text-align: center;
   border-style: solid;
-  padding-top:4px;
+  padding-top:3px;
+  padding-bottom:4px;
   width: 90%;
   height: 20px;
   margin-top: 5px;
@@ -565,6 +607,8 @@ div.resultLineItem{
   border-color:  rgb(45, 47, 71);
   border-radius:10px;
   background-color:rgba(245,245,245, 0.95);
+  font-family: 'Boogaloo', cursive;
+  font-size: 20px;
 }
 
 .profileVenuesLineItem:hover{
@@ -576,6 +620,9 @@ div.resultLineItem{
   font-size: 25px;
   font-weight: bold;
   margin: 5px 0 10px 0;
+  font-family: 'Lacquer', sans-serif;
+  font-variant: small-caps;
+
 }
 
 .profilepic{
@@ -603,7 +650,7 @@ div.resultLineItem{
 .mapBtn {
   position: absolute;
   display: block;
-  top: 16%;
+  top: 17%;
   left: 5%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
@@ -614,6 +661,8 @@ div.resultLineItem{
   border-width:2px;
   border-color: rgb(45, 47, 71);
   font-weight:bold;
+  font-family: 'Unica One';
+  font-size:25px;
 }
 
 .mapBtn:hover{
@@ -627,18 +676,19 @@ div.resultLineItem{
 
 .titleRed{
   color: red;
-  font-weight: bold;
-  font-size: 20px;
 }
 
 .titleWhite{
   color: white;
-  font-weight: bold;
-  font-size: 20px;
 }
 
 .title{
-  margin: 1.5% 0 0 6%;
+  position: absolute;
+  left: 6px;
+  margin: 0.75% 0 0 6%;
+  font-family: 'Lobster', cursive;
+  font-weight: bold;
+  font-size: 30px;
 }
 
 .title:hover{
@@ -652,7 +702,7 @@ div.resultLineItem{
 }
 
 .disabledLogo{
-  margin-top:1.2%;
+  margin-top:0.9%;
   margin-left:1%;
   float:left;
 }

@@ -65,14 +65,14 @@ export default class ReturnedQueries extends Component{
     // }
 
     fetchVenueInfo = () => { //quoted out to save on API calls
-        // fetch(`https://api.foursquare.com/v2/venues/${this.state.selectedLineItem.venue.id}?&client_id=` + process.env.REACT_APP_CLIENTID + '&client_secret=' + process.env.REACT_APP_CLIENTSECRET +'&v=20180323')
-        // .then(resp => resp.json())
-        // .then(data => this.setState({
-        //     selectedLineItemInfo: data.response.venue
-        // }))
-        // .catch(error => {
-        //     throw(error)
-        //   })
+        fetch(`https://api.foursquare.com/v2/venues/${this.state.selectedLineItem.venue.id}?&client_id=` + process.env.REACT_APP_CLIENTID + '&client_secret=' + process.env.REACT_APP_CLIENTSECRET +'&v=20180323')
+        .then(resp => resp.json())
+        .then(data => this.setState({
+            selectedLineItemInfo: data.response.venue
+        }))
+        .catch(error => {
+            throw(error)
+          })
     }
 
     componentDidMount(){
@@ -164,7 +164,11 @@ export default class ReturnedQueries extends Component{
                                                 handleQuerySelect={this.handleQuerySelect} 
                                             />    
                                         )}
-                                    <button className='buttons' onClick={this.props.toggleMap} >Map View</button>
+                                        {this.props.savedVenues.length === 0 ? 
+                                            null
+                                            :
+                                            <button className='buttons' onClick={this.props.toggleMap} >Map View</button>
+                                        }
                                     </div>
                                 : 
                                 null
@@ -191,7 +195,7 @@ export default class ReturnedQueries extends Component{
                         </div>
                     </div>
 
-                {this.state.selectedLineItem?
+                {this.state.selectedLineItemInfo?
                     <InfoCardPopup 
                         selectedLineItem={this.state.selectedLineItem} 
                         selectedLineItemInfo={this.state.selectedLineItemInfo} 

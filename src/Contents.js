@@ -58,8 +58,11 @@ export default class Contents extends React.Component{
       componentDidUpdate(prevProps, prevState){
         //   console.log(prevProps)
         //   console.log(this.props)
-        if(this.props.currentUser !== prevProps.currentUser && this.props.currentUser !== null && prevState.savedVenues !== this.state.savedVenues){
-            this.fetchSavedVenues()
+        if(this.props.currentUser !== prevProps.currentUser && this.props.currentUser !== null){
+            // this.setState({
+            //     savedVenues: []
+            // })
+            setTimeout(this.fetchSavedVenues(), 1000)
         }
         if(this.errorMsgBtn.current !== null){
             this.errorMsgBtn.current.focus();
@@ -70,17 +73,31 @@ export default class Contents extends React.Component{
       }
     
       fetchSavedVenues = () => {
-          fetch(`http://localhost:3000/activities`)
-          .then(resp => resp.json())
-          .then(data => 
-              this.setState({
-                  savedVenues: data.filter(activity => activity.user_id === this.props.currentUser.id)
-              })
+        fetch(`http://localhost:3000/activities`)
+        .then(resp => resp.json())
+        .then(data => 
+            // data.length === 0 ?
+            //     []
+            //     :
+            //     data.length === 1 ?
+            //         data[0].user_id === this.props.currentUser.id ? 
+            //         this.setState({
+            //             savedVenues: data[0]
+            //         }) 
+            //         :
+            //         []
+            //     :
+            //     this.setState({
+            //         savedVenues: data.filter(activity => activity.user_id === this.props.currentUser.id)
+            //     })
+            this.setState({
+                savedVenues: data
+            })
           )
       }
     
     handleSaveVenue = (venue) => {
-    //   console.log(venue)
+      console.log(venue)
         fetch(`http://localhost:3000/activities`, {
             method: "POST",
             headers: {
@@ -92,7 +109,8 @@ export default class Contents extends React.Component{
                 venue_name: venue.name,
                 venue_api_id: venue.id,
                 lat: venue.location.lat,
-                lng: venue.location.lng
+                lng: venue.location.lng,
+                address: venue.location.formattedAddress.join(' ')
             })
         })
         .then(() => this.fetchSavedVenues())  
@@ -159,7 +177,7 @@ export default class Contents extends React.Component{
                             {...routerProps} 
                             currentUser={this.props.currentUser} 
                             handleErrors={this.handleErrors}
-                            savedVenues={this.state.savedVenues}
+                            savedVenues={this.state.savedVenues.filter(venue => venue.user_id === this.props.currentUser.id)}
                             handleSaveVenue={this.handleSaveVenue}
                             toggleMap={this.toggleMap}
                             handleDeleteVenue={this.handleDeleteVenue}
@@ -174,7 +192,7 @@ export default class Contents extends React.Component{
                         <Profile 
                             {...routerProps} 
                             currentUser={this.props.currentUser} 
-                            savedVenues={this.state.savedVenues}
+                            savedVenues={this.state.savedVenues.filter(venue => venue.user_id === this.props.currentUser.id)}
                             fetchSavedVenues={this.fetchSavedVenues}
                             handleProfileDelete={this.handleProfileDelete}
                             toggleMap={this.toggleMap}
@@ -190,7 +208,7 @@ export default class Contents extends React.Component{
                 }
 
                 {this.state.showMap?
-                    <MapContainer savedVenues={this.state.savedVenues} map={this.map} toggleMap={this.toggleMap} /> 
+                    <MapContainer savedVenues={this.state.savedVenues.filter(venue => venue.user_id === this.props.currentUser.id)} map={this.map} toggleMap={this.toggleMap} /> 
                     :
                     null
                 }

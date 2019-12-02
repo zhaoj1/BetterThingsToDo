@@ -15,7 +15,7 @@ class QueriesMap extends React.Component{
     state = {
         showingInfoWindow: false,
         activeMarker: {},
-        selectedPlace: {}
+        selectedPlace: null
     }
 
     setBounds = () => {
@@ -72,7 +72,7 @@ class QueriesMap extends React.Component{
                     {this.props.recommendedVenues.length !== 0?
                         this.props.recommendedVenues.map(venue =>
                             <Marker
-                                onClick={this.onMarkerClick}
+                                onClick={(props,marker,e) => this.onMarkerClick(venue, marker, e)}
                                 name={venue.venue.name}
                                 icon={marker}
                                 position={{lat: venue.venue.location.lat, lng: venue.venue.location.lng}}
@@ -81,16 +81,21 @@ class QueriesMap extends React.Component{
                         :
                         null
                     }
-
-                    <InfoWindow
+                    {this.state.selectedPlace ? 
+                        <InfoWindow
                         marker={this.state.activeMarker}
                         visible={this.state.showingInfoWindow}
                         onClose={this.onClose}
-                    >
-                        <div>
-                            <h4>{this.state.selectedPlace.name}</h4>
-                        </div>
-                    </InfoWindow>
+                        >
+                            <div>
+                                <h4>{this.state.selectedPlace.venue.name}</h4>
+                                <p>{this.state.selectedPlace.venue.location.formattedAddress.join(' ')}</p>
+                            </div>
+                        </InfoWindow>
+                        :
+                        null
+                    }
+                    
                     <button className='mapBtn' onClick={this.props.toggleRecommendedMap} >Close Map</button>
                     </Map>
                 </div>

@@ -2,7 +2,9 @@ import React from 'react';
 import NavBox from './NavBox'
 import Contents from './Contents'
 import LogoutPopup from './LogoutPopup'
-import MapContainer from './MapContainer'
+
+let backgrounds = ['url(./assets/bg.png)', 'url(./assets/bgTransitionV2.png)']
+let i = 0
 
 export default class App extends React.Component{
 
@@ -38,7 +40,7 @@ export default class App extends React.Component{
       logoutPopup: true,
       toggleNav: !this.state.toggleNav
     })
-    this.props.history.push('./main')
+    this.props.history.push('./login')
     // setTimeout(() => alert('Successfully Logged Out'), 200)
   }  
 
@@ -53,6 +55,12 @@ export default class App extends React.Component{
       logoutPopup:false,
       toggleNav: !this.state.toggleNav
     })
+  }
+
+  nextBackground = () => {
+    i++;
+    i = i % backgrounds.length
+    document.body.setAttribute('background-image', backgrounds[i])
   }
 
   // componentDidMount = () => {
@@ -76,13 +84,15 @@ export default class App extends React.Component{
 
   render(){
     // console.log(this.state.currentUser)
+    setInterval(this.nextBackground(), 1000)
+    document.body.setAttribute('background-image', backgrounds[0])
     return(
       <div className='appWindow'>
         <div className='window' >
-          <NavBox currentUser={this.state.currentUser} logout={this.logout} toggleNav={this.state.toggleNav} />
+          <NavBox currentUser={this.state.currentUser} logout={this.logout} toggleNav={this.state.toggleNav} searchBack={this.state.searchBack} />
         </div>
         <div className='contents' >
-          <Contents currentUser={this.state.currentUser} setUser={this.setUser} logoutMsg={this.logoutMsg} toggleDisableNav={this.toggleDisableNav} />
+          <Contents currentUser={this.state.currentUser} setUser={this.setUser} logoutMsg={this.logoutMsg} toggleDisableNav={this.toggleDisableNav} searchBack={this.state.searchBack} />
           {this.state.logoutPopup?
             <LogoutPopup handleBackBtn={this.handleLogoutBackBtn} logoutMsg={this.logoutMsg} />
             :

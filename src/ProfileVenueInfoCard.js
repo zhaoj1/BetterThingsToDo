@@ -4,8 +4,8 @@ import foursquare from './assets/powered-by-foursquare-white.png'
 export default class ProfileVenueInfoCard extends Component{
 
     render() {
-        // console.log(this.props.selectedLineItem)
-        // console.log(this.props.selectedLineItemInfo)
+        console.log(this.props.selectedLineItem)
+        console.log(this.props.selectedLineItemInfo)
         return(
             <div className='popup' >
                 <div className='popup\_inner'>
@@ -24,61 +24,61 @@ export default class ProfileVenueInfoCard extends Component{
                                     <p>{this.props.selectedLineItemInfo.categories[0].name}</p>
                                     
                                     <p>Rating:&nbsp;
-                                        {/* {this.props.selectedLineItemInfo.rating?
+                                        {this.props.selectedLineItemInfo.rating?
                                             this.props.selectedLineItemInfo.rating
                                             :
                                             ' No ratings'
-                                        } */}
-                                        rating
+                                        }
+                                        {/* rating */}
                                     </p>
 
                                 </div>
                                 <div className='venueDesc'>
                                     <p>
-                                        {/* {this.props.selectedLineItemInfo.description?
+                                        {this.props.selectedLineItemInfo.description?
                                             this.props.selectedLineItemInfo.description
                                             :
                                             'No Description'
-                                        } */}
-                                        description
+                                        }
+                                        {/* description */}
                                     </p>
                                 </div>
                                 <div className='venueInfo' >
                                     
                                     <p>Phone:&nbsp;
-                                        {/* {this.props.selectedLineItemInfo.contact.formattedPhone? 
+                                        {this.props.selectedLineItemInfo.contact.formattedPhone? 
                                             this.props.selectedLineItemInfo.contact.formattedPhone
                                             :
                                             ' N/A'
-                                        } */}
-                                        phone number
+                                        }
+                                        {/* phone number */}
                                     </p>
 
                                     <p>Days Open:&nbsp;
-                                        {/* {this.props.selectedLineItemInfo.hours? 
+                                        {this.props.selectedLineItemInfo.hours? 
                                             this.props.selectedLineItemInfo.hours.timeframes[0].days
                                             :
                                             ' N/A'
-                                        }  */}
-                                        days
+                                        } 
+                                        {/* days */}
                                     </p>
 
                                     <p>Hours:&nbsp;
-                                        {/* {this.props.selectedLineItemInfo.hours?
+                                        {this.props.selectedLineItemInfo.hours?
                                             this.props.selectedLineItemInfo.hours.timeframes[0].open[0].renderedTime
                                             :
                                             ' N/A'
-                                        }  */}
-                                        hours
+                                        } 
+                                        {/* hours */}
                                     </p>
                                     
                                     <p>Price Tier:&nbsp;
-                                        {/* {this.props.selectedLineItemInfo.price?
+                                        {this.props.selectedLineItemInfo.price?
                                             this.props.selectedLineItemInfo.price.currency
                                             :
                                             ' N/A'
-                                        }  */}
-                                        price
+                                        } 
+                                        {/* price */}
                                     </p>
                                 </div>
                             </div>

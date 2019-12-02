@@ -36,7 +36,7 @@ class ActivitiesController < ApplicationController
     private
 
     def activityParams
-        params.require(:activity).permit(:user_id, :venue_name, :venue_api_id, :lat, :lng)
+        params.require(:activity).permit(:user_id, :venue_name, :venue_api_id, :lat, :lng, :address)
     end
 
 end

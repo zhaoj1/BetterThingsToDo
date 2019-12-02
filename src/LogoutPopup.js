@@ -11,7 +11,7 @@ export default class ErrorPopup extends Component{
         return(
                 <div className='popup' >
                     <div className='logout_popup_inner'>
-                        <p className='error'>Successfully logged out.</p>
+                        <p className='logout'>Successfully logged out.</p>
                         <button className='buttons' onClick={this.props.handleBackBtn} ref={this.props.logoutMsg} >Back</button>
                     </div>
                 </div>

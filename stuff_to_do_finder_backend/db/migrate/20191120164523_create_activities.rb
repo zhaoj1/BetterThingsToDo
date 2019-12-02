@@ -6,6 +6,7 @@ class CreateActivities < ActiveRecord::Migration[6.0]
       t.string :venue_api_id
       t.float :lat
       t.float :lng
+      t.string :address
 
       t.timestamps
     end

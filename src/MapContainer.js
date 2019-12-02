@@ -45,6 +45,7 @@ class MapContainer extends React.Component{
 
     render(){
         this.setBounds();
+        console.log(this.state.selectedPlace)
         return(
             <div className='wrapper' style={{'height':'100%'}}>
                 <div className='mapContainer'>
@@ -70,17 +71,21 @@ class MapContainer extends React.Component{
                         name={'Flatiron School'}
                         position={{lat: 40.7052529, lng: -74.0146175}}
                     /> */}
-                    {this.props.savedVenues.length !== 0?
-                        this.props.savedVenues.map(venue =>
-                            <Marker
-                                onClick={this.onMarkerClick}
-                                name={venue.venue_name}
-                                icon={marker}
-                                position={{lat: venue.lat, lng: venue.lng}}
-                            />
-                        )
-                        :
+                    {this.props.savedVenues.length === 0 ?
                         null
+                        :
+                        this.props.savedVenues.length !== 0?
+                            this.props.savedVenues.map(venue =>
+                                <Marker
+                                    onClick={(props,marker,e) => this.onMarkerClick(venue, marker, e)}
+                                    name={venue.venue_name}
+                                    content='content'
+                                    icon={marker}
+                                    position={{lat: venue.lat, lng: venue.lng}}
+                                />
+                            )
+                            :
+                            null
                     }
 
                     <InfoWindow
@@ -89,7 +94,8 @@ class MapContainer extends React.Component{
                         onClose={this.onClose}
                     >
                         <div>
-                            <h4>{this.state.selectedPlace.name}</h4>
+                            <h4>{this.state.selectedPlace.venue_name}</h4>
+                            <p>{this.state.selectedPlace.address}</p>
                         </div>
                     </InfoWindow>
                     <button className='mapBtn' onClick={this.props.toggleMap} >Close Map</button>

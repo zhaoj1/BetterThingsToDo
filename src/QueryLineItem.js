@@ -7,7 +7,7 @@ export default class QueryLineItem extends Component{
         return(
             <>
                 <div className='queryLineItem' onClick={(event) => this.props.handleQuerySelect(event, 'recommended')}>
-                    <h5>{this.props.venue.venue.name}</h5>
+                    <label>{this.props.venue.venue.name}</label>
                 </div>         
             </>
         )
