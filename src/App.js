@@ -3,9 +3,6 @@ import NavBox from './NavBox'
 import Contents from './Contents'
 import LogoutPopup from './LogoutPopup'
 
-let backgrounds = ['url(./assets/bg.png)', 'url(./assets/bgTransitionV2.png)']
-let i = 0
-
 export default class App extends React.Component{
 
   constructor(){
@@ -57,11 +54,7 @@ export default class App extends React.Component{
     })
   }
 
-  nextBackground = () => {
-    i++;
-    i = i % backgrounds.length
-    document.body.setAttribute('background-image', backgrounds[i])
-  }
+  
 
   // componentDidMount = () => {
   //   if(localStorage.token){
@@ -84,8 +77,6 @@ export default class App extends React.Component{
 
   render(){
     // console.log(this.state.currentUser)
-    setInterval(this.nextBackground(), 1000)
-    document.body.setAttribute('background-image', backgrounds[0])
     return(
       <div className='appWindow'>
         <div className='window' >

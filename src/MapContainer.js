@@ -2,7 +2,6 @@ import React from 'react';
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 import marker from './assets/markerV2.png'
 
-const mapsrc = "https://www.google.com/maps/embed/v1/view?&zoom=13&center=40.771699, -73.832559&zoom=8&key=" + process.env.REACT_APP_GOOGLE
 const mapStyles = {
     width: '100%',
     height: '100%',
@@ -45,7 +44,6 @@ class MapContainer extends React.Component{
 
     render(){
         this.setBounds();
-        console.log(this.state.selectedPlace)
         return(
             <div className='wrapper' style={{'height':'100%'}}>
                 <div className='mapContainer'>

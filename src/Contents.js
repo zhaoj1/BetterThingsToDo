@@ -6,7 +6,6 @@ import Login from './Login'
 import Profile from './Profile'
 import ErrorPopup from './ErrorPopup'
 import MapContainer from './MapContainer'
-import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 
 export default class Contents extends React.Component{
 
@@ -91,12 +90,13 @@ export default class Contents extends React.Component{
             //         savedVenues: data.filter(activity => activity.user_id === this.props.currentUser.id)
             //     })
             this.setState({
-                savedVenues: data
+                // savedVenues: data
+                savedVenues: data.filter(activity => activity.user_id === this.props.currentUser.id)
             })
           )
       }
     
-    handleSaveVenue = (venue) => {
+    handleSaveVenue(venue){
       console.log(venue)
         fetch(`http://localhost:3000/activities`, {
             method: "POST",
@@ -114,7 +114,6 @@ export default class Contents extends React.Component{
             })
         })
         .then(() => this.fetchSavedVenues())  
-        .catch(error => console.log(error))
     }
 
     handleDeleteVenue = (venue) => {
@@ -177,7 +176,8 @@ export default class Contents extends React.Component{
                             {...routerProps} 
                             currentUser={this.props.currentUser} 
                             handleErrors={this.handleErrors}
-                            savedVenues={this.state.savedVenues.filter(venue => venue.user_id === this.props.currentUser.id)}
+                            // savedVenues={this.state.savedVenues.filter(venue => venue.user_id === this.props.currentUser.id)}
+                            savedVenues={this.state.savedVenues}
                             handleSaveVenue={this.handleSaveVenue}
                             toggleMap={this.toggleMap}
                             handleDeleteVenue={this.handleDeleteVenue}
@@ -192,7 +192,8 @@ export default class Contents extends React.Component{
                         <Profile 
                             {...routerProps} 
                             currentUser={this.props.currentUser} 
-                            savedVenues={this.state.savedVenues.filter(venue => venue.user_id === this.props.currentUser.id)}
+                            // savedVenues={this.state.savedVenues.filter(venue => venue.user_id === this.props.currentUser.id)}
+                            savedVenues={this.state.savedVenues}
                             fetchSavedVenues={this.fetchSavedVenues}
                             handleProfileDelete={this.handleProfileDelete}
                             toggleMap={this.toggleMap}

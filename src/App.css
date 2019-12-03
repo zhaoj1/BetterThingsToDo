@@ -4,15 +4,15 @@ html, body, #app, #app>div {
 
 body{
   height:100%;
-  background: url('./assets/bg.png') no-repeat fixed bottom;
+  background: url('./assets/bgV2.png') no-repeat fixed bottom;
   background-size: contain;
   background-color:rgba(0,0,0,0.55);
-  animation: change 12s infinite;
+  animation: change 10s infinite;
 }
 
 @keyframes change{
-  0% {background-image: url('./assets/bg.png')}
-  50% {background-image: url('./assets/bgTransitionV2.png')}
+  0% {background-image: url('./assets/bgV2.png')}
+  50% {background-image: url('./assets/bgTransitionV4.png')}
 }
 
 .contents{
@@ -109,21 +109,21 @@ body{
 
 .inputHeader{
   font-variant: small-caps;
-  font-size: 25px;
+  font-size: 30px;
   color: whitesmoke;
-  margin-top: 0;
   border-style: solid;
   border-color: rgb(45, 47, 71);
-  height:35px;
+  height:45px;
   margin:auto;
   margin-bottom: 20px;
+  padding: 0 0 5px 0;
   margin-top:0;
   margin-left:0;
   border-radius:5px;
   border-bottom-left-radius:0;
   border-bottom-right-radius:0;
   background-color:rgb(45, 47, 71);
-  font-family: 'Lacquer', sans-serif;
+  font-family: 'Coda Caption', sans-serif;
 }
 
 input[type=submit].buttons {
@@ -208,7 +208,7 @@ input[type=submit].buttons {
   border-radius:10px;
   padding: 0 10px 0 10px;
   background-color:rgba(245,245,245, 0.85);
-  font-family: 'Lacquer', sans-serif;
+  font-family: 'Coda Caption', sans-serif;
 }
 
 div.resultLineItem{
@@ -330,7 +330,7 @@ div.resultLineItem{
 
 .venueListsHeaders{
   margin: 0 0 15px 0;
-  font-family: 'Lacquer', sans-serif;
+  font-family: 'Coda Caption', sans-serif;
 }
 
 .savedVenues{
@@ -524,7 +524,7 @@ div.resultLineItem{
   border-radius:5px;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
-  font-family: 'Lacquer', sans-serif;
+  font-family: 'Coda Caption', sans-serif;
 }
 
 .logout_popup_inner{
@@ -620,7 +620,7 @@ div.resultLineItem{
   font-size: 25px;
   font-weight: bold;
   margin: 5px 0 10px 0;
-  font-family: 'Lacquer', sans-serif;
+  font-family: 'Coda Caption', sans-serif;
   font-variant: small-caps;
 
 }
@@ -685,10 +685,10 @@ div.resultLineItem{
 .title{
   position: absolute;
   left: 6px;
-  margin: 0.75% 0 0 6%;
+  margin: 0.6% 0 0 6%;
   font-family: 'Lobster', cursive;
   font-weight: bold;
-  font-size: 30px;
+  font-size: 40px;
 }
 
 .title:hover{

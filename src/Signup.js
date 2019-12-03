@@ -55,7 +55,7 @@ export default class Signup extends Component{
             <div className='wrapper'>
                 <div className='signup'>
                     <form className='signupForm' onSubmit={this.handleSubmit} >
-                        <h3 className='inputHeader'>Sign up</h3>
+                        <h3 className='inputHeader'>Sign Up</h3>
                         <input 
                             type='text' 
                             name='username' 
@@ -86,7 +86,7 @@ export default class Signup extends Component{
                         
                         <br></br>
                         
-                        <input className='buttons' type='submit' value='Signup'></input>  
+                        <input className='buttons' type='submit' value='Sign Up'></input>  
                     </form>
                 </div>
             </div>
