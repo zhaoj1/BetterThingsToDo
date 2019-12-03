@@ -20,7 +20,8 @@ export default class ReturnedQueries extends Component{
             selectedLineItem: null,
             selectedLineItemInfo: null,
             list: null,
-            showRecommendedMap:false
+            showRecommendedMap:false,
+            firstLineItem: 0
             // savedVenues: null
         }
     }
@@ -77,7 +78,7 @@ export default class ReturnedQueries extends Component{
 
     componentDidMount(){
         this.setState({
-            showRecommendedMap:false
+            showRecommendedMap:false,
         })
     }
 
@@ -128,13 +129,26 @@ export default class ReturnedQueries extends Component{
         this.props.toggleDisableNav()
     }
 
+    nextButton = () => {
+        this.setState(prevState => ({
+            firstLineItem: prevState.firstLineItem + 5,
+        }))
+    }
+
+    prevButton = () => {
+        this.setState  (prevState => ({
+            firstLineItem: prevState.firstLineItem - 5
+        }))
+    }
+
     render() {
         // console.log(this.state.savedVenues)
         // console.log(this.props.currentUser)
         // console.log(this.state)
-        // console.log(this.props.recommendedVenues)
+        // console.log(this.props.recommendedVenues.map(venue => venue.venue.categories[0].name))
         // console.log(this.props.showMap)
         // console.log(this.state.showRecommendedMap)
+        // console.log(this.state.firstLineItem)
         return(
             <>
                 {/* {this.state.selectedLineItem?
@@ -191,7 +205,9 @@ export default class ReturnedQueries extends Component{
 
                             <div className='recommendedList'>
                                 <h1 className='venueListsHeaders' >Venues</h1>
-                                {this.props.recommendedVenues.map(venue => 
+                                {/* {this.props.recommendedVenues.map(venue =>  */}
+
+                                {this.props.recommendedVenues.slice(this.state.firstLineItem, this.state.firstLineItem + 5).map(venue => 
                                     <QueryLineItem 
                                         venue={venue} 
                                         recommendedVenues={this.props.recommendedVenues} 
@@ -199,6 +215,21 @@ export default class ReturnedQueries extends Component{
                                         handleQuerySelect={this.handleQuerySelect} 
                                     />
                                 )}
+                                
+
+                                {this.state.firstLineItem === 0?
+                                    null 
+                                    : 
+                                    <button className='buttons' onClick={this.prevButton} >Prev</button>
+                                }
+
+                                {this.state.firstLineItem === 15?
+                                    null
+                                    :
+                                    <button className='buttons' onClick={this.nextButton} >Next</button>
+                                }
+                                
+                                
                                 <button className='buttons' onClick={this.toggleRecommendedMap}>Map View</button>
                             </div>
                         </div>

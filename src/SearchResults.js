@@ -9,7 +9,7 @@ export default class SearchResults extends Component{
         this.state = {
             firstSelected: null,
             secondSelected: null,
-            midpoint: null
+            midpoint: null,
         }
 
         this.handleResultSelect = this.handleResultSelect.bind(this)
@@ -75,7 +75,7 @@ export default class SearchResults extends Component{
 
     fetchVenues = () => {
         // console.log(this.state.midpoint)
-        fetch('https://api.foursquare.com/v2/venues/explore?client_id=' + process.env.REACT_APP_CLIENTID + '&client_secret=' + process.env.REACT_APP_CLIENTSECRET+ `&v=20180323&limit=10&near=${this.state.midpoint[0]},${this.state.midpoint[1]}`)
+        fetch('https://api.foursquare.com/v2/venues/explore?client_id=' + process.env.REACT_APP_CLIENTID + '&client_secret=' + process.env.REACT_APP_CLIENTSECRET+ `&v=20180323&limit=20&near=${this.state.midpoint[0]},${this.state.midpoint[1]}`)
         .then(resp => resp.json())
         .then(data => this.props.setRecommendations(data.response.groups[0].items))
         // .then(data => console.log(data.response.groups[0].items))
