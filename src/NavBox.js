@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom'
-import logo from './assets/logo3.png'
+import logo from './assets/logo4.png'
 
 function NavBox(props){
 

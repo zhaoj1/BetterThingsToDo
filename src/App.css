@@ -4,15 +4,15 @@ html, body, #app, #app>div {
 
 body{
   height:100%;
-  background: url('./assets/bgV2.png') no-repeat fixed bottom;
+  background: url('./assets/bgV4.png') no-repeat fixed bottom;
   background-size: contain;
   background-color:rgba(0,0,0,0.55);
-  animation: change 10s infinite;
+  animation: change 8s infinite;
 }
 
 @keyframes change{
-  0% {background-image: url('./assets/bgV2.png')}
-  50% {background-image: url('./assets/bgTransitionV4.png')}
+  0% {background-image: url('./assets/bgV4.png')}
+  50% {background-image: url('./assets/bgTransitionV9.png')}
 }
 
 .contents{
@@ -63,7 +63,7 @@ body{
   margin-bottom: 10px;
   border-color:rgba(0,0,0,0.6);
   padding:4px;
-  font-family: 'Boogaloo', cursive;
+  font-family: 'Boogaloo';
   font-weight:bold;
   font-size:25px;
 }
@@ -123,7 +123,7 @@ body{
   border-bottom-left-radius:0;
   border-bottom-right-radius:0;
   background-color:rgb(45, 47, 71);
-  font-family: 'Coda Caption', sans-serif;
+  font-family: 'Coda Caption';
 }
 
 input[type=submit].buttons {
@@ -208,7 +208,7 @@ input[type=submit].buttons {
   border-radius:10px;
   padding: 0 10px 0 10px;
   background-color:rgba(245,245,245, 0.85);
-  font-family: 'Coda Caption', sans-serif;
+  font-family: 'Coda Caption';
 }
 
 div.resultLineItem{
@@ -330,7 +330,7 @@ div.resultLineItem{
 
 .venueListsHeaders{
   margin: 0 0 15px 0;
-  font-family: 'Coda Caption', sans-serif;
+  font-family: 'Coda Caption';
 }
 
 .savedVenues{
@@ -373,7 +373,7 @@ div.resultLineItem{
   border-color:  rgb(45, 47, 71);
   border-radius:10px;
   background-color:rgba(245,245,245, 0.95);
-  font-family: 'Boogaloo', cursive;
+  font-family: 'Boogaloo';
   font-size: 25px;
 }
 
@@ -417,9 +417,9 @@ div.resultLineItem{
   border-radius:10px;
   /* background-color:rgba(245,245,245, 0.75); */
   background-color:rgb(37,33,41);
-  font-weight: bold;
-  font-family: 'segoe ui', fantasy;
-  font-size:14px;
+  /* font-weight: bold; */
+  font-family: 'Boogaloo';
+  font-size:17px;
 }
 
 .venueNameLocation{
@@ -427,7 +427,7 @@ div.resultLineItem{
   margin-bottom: 10px;
   text-align: center;
   border-style: solid;
-  padding: 10px;
+  padding: 5px;
   border-color:  rgb(45, 47, 71);
   border-radius:10px;
   background-color:rgba(245,245,245, 0.9);
@@ -439,7 +439,6 @@ div.resultLineItem{
   margin-bottom: 5px;
   text-align: center;
   border-style: solid;
-  padding: 8px;
   border-color:  rgb(45, 47, 71);
   border-radius:10px;
   background-color:rgba(245,245,245, 0.9);
@@ -450,18 +449,16 @@ div.resultLineItem{
   margin-bottom: 5px;
   text-align: center;
   border-style: solid;
-  padding: 8px;
+  padding: 0 5px 0 5px;
   border-color:  rgb(45, 47, 71);
   border-radius:10px;
   background-color:rgba(245,245,245, 0.9);
-  font-weight: bold;
 }
 
 .venueInfo{
   margin:auto;
   text-align: center;
   border-style: solid;
-  padding: 8px;
   border-color:  rgb(45, 47, 71);
   border-radius:10px;
   background-color:rgba(245,245,245, 0.9);
@@ -524,7 +521,7 @@ div.resultLineItem{
   border-radius:5px;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
-  font-family: 'Coda Caption', sans-serif;
+  font-family: 'Coda Caption';
 }
 
 .logout_popup_inner{
@@ -620,7 +617,7 @@ div.resultLineItem{
   font-size: 25px;
   font-weight: bold;
   margin: 5px 0 10px 0;
-  font-family: 'Coda Caption', sans-serif;
+  font-family: 'Coda Caption';
   font-variant: small-caps;
 
 }
@@ -686,7 +683,7 @@ div.resultLineItem{
   position: absolute;
   left: 6px;
   margin: 0.6% 0 0 6%;
-  font-family: 'Lobster', cursive;
+  font-family: 'Lobster';
   font-weight: bold;
   font-size: 40px;
 }
@@ -696,13 +693,13 @@ div.resultLineItem{
 }
 
 .logo{
-  margin-top:0.9%;
+  margin-top:0.8%;
   margin-left:1%;
   float:left;
 }
 
 .disabledLogo{
-  margin-top:0.9%;
+  margin-top:0.8%;
   margin-left:1%;
   float:left;
 }
