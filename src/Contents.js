@@ -112,7 +112,7 @@ export default class Contents extends React.Component{
       }
     
     handleSaveVenue(venue){
-      console.log(venue)
+    //   console.log(venue)
         fetch(`http://localhost:3000/activities`, {
             method: "POST",
             headers: {
@@ -158,8 +158,8 @@ export default class Contents extends React.Component{
 
     render(){
         // console.log(this.state.errorMessage)
-        console.log(this.props.currentUser)
-        console.log(this.state.savedVenues)
+        // console.log(this.props.currentUser)
+        // console.log(this.state.savedVenues)
         // console.log(this.props)
         return(
             <div >

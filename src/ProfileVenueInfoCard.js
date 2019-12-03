@@ -4,8 +4,8 @@ import foursquare from './assets/powered-by-foursquare-white.png'
 export default class ProfileVenueInfoCard extends Component{
 
     render() {
-        console.log(this.props.selectedLineItem)
-        console.log(this.props.selectedLineItemInfo)
+        // console.log(this.props.selectedLineItem)
+        // console.log(this.props.selectedLineItemInfo)
         return(
             <div className='popup' >
                 <div className='popup\_inner'>

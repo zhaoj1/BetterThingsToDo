@@ -199,7 +199,7 @@ export default class ReturnedQueries extends Component{
                                         handleQuerySelect={this.handleQuerySelect} 
                                     />
                                 )}
-                                <button className='buttons' onClick={this.toggleRecommendedMap} >Map View</button>
+                                <button className='buttons' onClick={this.toggleRecommendedMap}>Map View</button>
                             </div>
                         </div>
                         <div className='queryPageBtn'>

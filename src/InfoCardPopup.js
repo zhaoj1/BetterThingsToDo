@@ -4,7 +4,7 @@ import foursquare from './assets/powered-by-foursquare-white.png'
 export default class InfoCardPopup extends Component{
 
     render() {
-        console.log(this.props)
+        // console.log(this.props)
         return(
             <div className='popup' >
                 {/* <div className='wrapper'> */}

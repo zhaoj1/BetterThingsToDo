@@ -215,9 +215,10 @@ div.resultLineItem{
   margin:auto;
   text-align: center;
   border-style: solid;
-  padding: 0 0 15px;
+  padding: 2px 2px 10px 2px;
   width: 99%;
-  height: 65px;
+  /* height: 65px; */
+  height:15%;
   margin-top: 10px;
   border-color:  rgb(45, 47, 71);
   border-radius:10px;
@@ -235,16 +236,16 @@ div.resultLineItem{
   margin:auto;
   text-align: center;
   border-style: solid;
-  padding: 0 0 15px;
+  padding: 2px 2px 10px 2px;
   width: 99%;
-  height: 65px;
+  /* height: 65px; */
   margin-top: 10px;
-  background-color: rgb(106, 204, 109);
+  background-color: rgb(140, 235, 140);
   color: whitesmoke;
   border-color:  rgb(45, 47, 71);
   border-radius:10px;
   font-family: 'Boogaloo';
-  font-size:23px;
+  font-size:25px;
 }
 
 .window{
