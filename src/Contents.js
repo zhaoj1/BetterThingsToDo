@@ -61,7 +61,11 @@ export default class Contents extends React.Component{
             // this.setState({
             //     savedVenues: []
             // })
-            setTimeout(this.fetchSavedVenues(), 1000)
+            // setTimeout(this.fetchSavedVenues(), 1000)
+            this.fetchSavedVenues()
+            this.setState({
+                savedVenues: this.state.savedVenues.filter(venue => venue.user_id === this.props.currentUser)
+            })
         }
         if(this.errorMsgBtn.current !== null){
             this.errorMsgBtn.current.focus();
@@ -89,9 +93,20 @@ export default class Contents extends React.Component{
             //     this.setState({
             //         savedVenues: data.filter(activity => activity.user_id === this.props.currentUser.id)
             //     })
+
+            // data.length > 0?
+            //     data.filter(activity => activity.user_id === this.props.currentUser.id).length > 0?
+            //         this.setState({
+            //             // savedVenues: data
+            //             savedVenues: data.filter(activity => activity.user_id === this.props.currentUser.id)
+            //         })
+            //         :
+            //         null
+            //     :
+            //     null
+
             this.setState({
-                // savedVenues: data
-                savedVenues: data.filter(activity => activity.user_id === this.props.currentUser.id)
+                savedVenues: data
             })
           )
       }
@@ -113,7 +128,7 @@ export default class Contents extends React.Component{
                 address: venue.location.formattedAddress.join(' ')
             })
         })
-        .then(() => this.fetchSavedVenues())  
+        .then(() => this.fetchSavedVenues())
     }
 
     handleDeleteVenue = (venue) => {
@@ -143,8 +158,8 @@ export default class Contents extends React.Component{
 
     render(){
         // console.log(this.state.errorMessage)
-        // console.log(this.props.currentUser)
-        // console.log(this.state.savedVenues)
+        console.log(this.props.currentUser)
+        console.log(this.state.savedVenues)
         // console.log(this.props)
         return(
             <div >

@@ -4,15 +4,15 @@ html, body, #app, #app>div {
 
 body{
   height:100%;
-  background: url('./assets/bgV4.png') no-repeat fixed bottom;
+  background: url('./assets/bgV5.png') no-repeat fixed bottom;
   background-size: contain;
   background-color:rgba(0,0,0,0.55);
   animation: change 8s infinite;
 }
 
 @keyframes change{
-  0% {background-image: url('./assets/bgV4.png')}
-  50% {background-image: url('./assets/bgTransitionV9.png')}
+  0% {background-image: url('./assets/bgV5.png')}
+  50% {background-image: url('./assets/bgTransitionV10.png')}
 }
 
 .contents{

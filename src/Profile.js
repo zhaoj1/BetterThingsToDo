@@ -59,7 +59,7 @@ export default class Profile extends Component{
                                 <p className='username'>{this.props.currentUser.username}</p>
                                 <img className='profilepic' src='http://sunfieldfarm.org/wp-content/uploads/2014/02/profile-placeholder.png' height='120' width='120' />
                                 <br></br>
-                                {this.props.savedVenues.length === 0 ? 
+                                {this.props.savedVenues.filter(venue => venue.user_id === this.props.currentUser.id).length === 0 ? 
                                     null
                                     :
                                     <button className='buttons' onClick={this.props.toggleMap} >Map View</button>

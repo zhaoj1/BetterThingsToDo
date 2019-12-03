@@ -157,14 +157,27 @@ export default class ReturnedQueries extends Component{
                                 this.props.savedVenues ? 
                                     <div className='savedVenues'>
                                         <h1 className='venueListsHeaders'>Saved Venues</h1>
-                                        {this.props.savedVenues.map(venue =>
+                                        {this.props.savedVenues.filter(venue => venue.user_id === this.props.currentUser.id).length > 0 ?
+                                            this.props.savedVenues.filter(venue => venue.user_id === this.props.currentUser.id).map(venue =>
+                                                <SavedVenuesLineItem 
+                                                    venue={venue.venue_name} 
+                                                    selectedLineItem={this.state.selectedLineItem} 
+                                                    handleQuerySelect={this.handleQuerySelect} 
+                                                />    
+                                            )
+                                            :
+                                            null
+                                        }
+
+                                        {/* {this.props.savedVenues.map(venue =>
                                             <SavedVenuesLineItem 
                                                 venue={venue.venue_name} 
                                                 selectedLineItem={this.state.selectedLineItem} 
                                                 handleQuerySelect={this.handleQuerySelect} 
                                             />    
-                                        )}
-                                        {this.props.savedVenues.length === 0 ? 
+                                        )} */}
+
+                                        {this.props.savedVenues.filter(venue => venue.user_id === this.props.currentUser.id).length === 0 ?
                                             null
                                             :
                                             <button className='buttons' onClick={this.props.toggleMap} >Map View</button>
