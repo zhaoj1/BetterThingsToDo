@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ResultLineItem from './ResultLineItem'
+import Filter from './Filter'
 
 export default class SearchResults extends Component{
 
@@ -10,9 +11,17 @@ export default class SearchResults extends Component{
             firstSelected: null,
             secondSelected: null,
             midpoint: null,
+            selectedCategory: 'None'
         }
 
         this.handleResultSelect = this.handleResultSelect.bind(this)
+        this.handleDropdownSelect = this.handleDropdownSelect.bind(this)
+    }
+
+    componentDidMount = () => {
+        this.setState({
+            selectedCategory: null
+        })
     }
 
     calculateMidpoint = (firstAddress, secondAddress) => {
@@ -74,15 +83,32 @@ export default class SearchResults extends Component{
     }
 
     fetchVenues = () => {
-        // console.log(this.state.midpoint)
-        fetch('https://api.foursquare.com/v2/venues/explore?client_id=' + process.env.REACT_APP_CLIENTID + '&client_secret=' + process.env.REACT_APP_CLIENTSECRET+ `&v=20180323&limit=20&near=${this.state.midpoint[0]},${this.state.midpoint[1]}`)
-        .then(resp => resp.json())
-        .then(data => this.props.setRecommendations(data.response.groups[0].items))
-        // .then(data => console.log(data.response.groups[0].items))
-        .catch(error => {
-            throw(error)
-          })
+        this.state.selectedCategory === 'None' ?
+            fetch('https://api.foursquare.com/v2/venues/explore?client_id=' + process.env.REACT_APP_CLIENTID + '&client_secret=' + process.env.REACT_APP_CLIENTSECRET + `&v=20180323&limit=20&near=${this.state.midpoint[0]},${this.state.midpoint[1]}`)
+            .then(resp => resp.json())
+            .then(data => this.props.setRecommendations(data.response.groups[0].items))
+            :
+            fetch('https://api.foursquare.com/v2/venues/explore?client_id=' + process.env.REACT_APP_CLIENTID + '&client_secret=' + process.env.REACT_APP_CLIENTSECRET + `&v=20180323&limit=20&section=${this.state.selectedCategory}&near=${this.state.midpoint[0]},${this.state.midpoint[1]}`)
+            .then(resp => resp.json())
+            .then(data => this.props.setRecommendations(data.response.groups[0].items))
+
     }
+
+    // fetchVenues = () => {
+    //     // console.log(this.state.midpoint)
+    //     fetch('https://api.foursquare.com/v2/venues/explore?client_id=' + process.env.REACT_APP_CLIENTID + '&client_secret=' + process.env.REACT_APP_CLIENTSECRET + `&v=20180323&limit=20&near=${this.state.midpoint[0]},${this.state.midpoint[1]}`)
+    //     .then(resp => resp.json())
+    //     .then(data => this.props.setRecommendations(data.response.groups[0].items))
+    //     .catch(error => {
+    //         throw(error)
+    //       })
+    // }
+
+    // fetchCategories = () => {
+    //     fetch('https://api.foursquare.com/v2/venues/categories?client_id=' + process.env.REACT_APP_CLIENTID + '&client_secret=' + process.env.REACT_APP_CLIENTSECRET + `&v=20180323` )
+    //     .then(resp => resp.json())
+    //     .then(console.log)
+    // }
 
     handleResultSelect = (event) => {
         if(event.target.id === 'firstSelected'){
@@ -96,16 +122,30 @@ export default class SearchResults extends Component{
         }
     }
 
+    handleDropdownSelect = (event) => {
+        this.setState({
+            selectedCategory: event.target.value
+        })
+    }
+
     render() {
         // console.log(this.props.firstSearchResults)
         // console.log(this.props.secondSearchResults)
-        // console.log(this.state)
+        // console.log(this.state.categories)
+        // console.log(this.props.recommendedList)
+        // console.log(this.state.midpoint)
+        console.log(this.state.selectedCategory)
         return(
             <div>              
                 <div className='searchResultsMajorDiv'>
                     <div className='searchResultsHeader'>
                         <h3>Please specify addresses:</h3>
                     </div>
+
+                    <div className='filterDiv'>
+                        <Filter handleDropdownSelect={this.handleDropdownSelect} />
+                    </div>
+
                     <div className='searchResultsLists' >
                         <div className='searchResults' style={{'float':'left'}}>
                             {this.props.loading ?
@@ -143,6 +183,7 @@ export default class SearchResults extends Component{
                             }
                         </div>
                     </div>
+
                     <div className='searchResultsBtns'>
                         <button className='buttons' onClick={() => this.handleSubmitQuery(this.state.firstSelected, this.state.secondSelected)} >Continue</button> 
                         <button className='buttons' onClick={this.props.handleBackBtn}>Back</button><br></br>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_20_164523) do
+ActiveRecord::Schema.define(version: 2019_12_03_234159) do
 
   create_table "activities", force: :cascade do |t|
     t.integer "user_id"
@@ -19,6 +19,13 @@ ActiveRecord::Schema.define(version: 2019_11_20_164523) do
     t.float "lat"
     t.float "lng"
     t.string "address"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "category_name"
+    t.integer "api_category_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

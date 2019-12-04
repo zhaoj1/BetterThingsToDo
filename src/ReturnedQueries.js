@@ -218,13 +218,13 @@ export default class ReturnedQueries extends Component{
                                 
 
                                 {this.state.firstLineItem === 0?
-                                    null 
+                                    <button className='disabledButtons' disabled >Prev</button>
                                     : 
                                     <button className='buttons' onClick={this.prevButton} >Prev</button>
                                 }
 
                                 {this.state.firstLineItem === 15?
-                                    null
+                                    <button className='disabledButtons' disabled >Next</button>
                                     :
                                     <button className='buttons' onClick={this.nextButton} >Next</button>
                                 }
@@ -234,7 +234,7 @@ export default class ReturnedQueries extends Component{
                             </div>
                         </div>
                         <div className='queryPageBtn'>
-                            <button className='buttons' onClick={this.props.handleBackBtn}>Back</button><br></br>
+                            <button className='buttons' onClick={this.props.handleRecommendationsBack}>Back</button><br></br>
                             <img src={foursquare} width='200px' />
                         </div>
                     </div>

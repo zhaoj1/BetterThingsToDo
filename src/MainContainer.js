@@ -19,6 +19,7 @@ export default class MainContainer extends Component{
         this.handleAddressSubmit = this.handleAddressSubmit.bind(this)
         this.handleBackBtn = this.handleBackBtn.bind(this)
         this.setRecommendations = this.setRecommendations.bind(this)
+        this.handleRecommendationsBack = this.handleRecommendationsBack.bind(this)
         // this.setErrorMessage = this.setErrorMessage.bind(this)
         // this.removeErrorMessage = this.removeErrorMessage.bind(this)
     
@@ -50,11 +51,18 @@ export default class MainContainer extends Component{
           recommendedVenues: [],
         })
       }
+
+      handleRecommendationsBack = () => {
+        this.setState({
+          page: 'results',
+          recommendedVenues: []
+        })
+      }
     
       handleAddressSubmit(event){
         event.preventDefault();
     
-        fetch(`https://api.opencagedata.com/geocode/v1/json?q=${this.state.firstAddress}&key=` + process.env.REACT_APP_OCD_API_KEY + '&limit=5')
+        fetch(`https://api.opencagedata.com/geocode/v1/json?q=${this.state.firstAddress}&key=` + process.env.REACT_APP_OCD_API_KEY + '&limit=3')
         .then(resp => resp.json())
         .then(data => 
           this.setState({
@@ -66,7 +74,7 @@ export default class MainContainer extends Component{
           {throw(error)}
         })
 
-        fetch(`https://api.opencagedata.com/geocode/v1/json?q=${this.state.secondAddress}&key=` + process.env.REACT_APP_OCD_API_KEY + '&limit=5')
+        fetch(`https://api.opencagedata.com/geocode/v1/json?q=${this.state.secondAddress}&key=` + process.env.REACT_APP_OCD_API_KEY + '&limit=3')
         .then(resp => resp.json())
         .then(data => 
           this.setState({
@@ -143,6 +151,7 @@ export default class MainContainer extends Component{
                   map={this.props.map}
                   showMap={this.props.showMap}
                   toggleDisableNav={this.props.toggleDisableNav}
+                  handleRecommendationsBack={this.handleRecommendationsBack}
                 />
               :
               null
