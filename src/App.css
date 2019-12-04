@@ -4,15 +4,15 @@ html, body, #app, #app>div {
 
 body{
   height:100%;
-  background: url('./assets/bgV5.png') no-repeat fixed bottom;
+  background: url('./assets/bgCroppedV3.png') no-repeat fixed bottom;
   background-size: contain;
   background-color:rgba(0,0,0,0.55);
-  animation: change 8s infinite;
+  animation: change 6.5s infinite;
 }
 
 @keyframes change{
-  0% {background-image: url('./assets/bgV5.png')}
-  50% {background-image: url('./assets/bgTransitionV10.png')}
+  0% {background-image: url('./assets/bgCroppedV3.png')}
+  60% {background-image: url('./assets/bgTransitionCroppedV3.png')}
 }
 
 .contents{
@@ -240,7 +240,7 @@ div.resultLineItem{
   margin:auto;
   text-align: center;
   border-style: solid;
-  padding: 2px 2px 10px 2px;
+  padding: 4px 2px 7px 2px;
   width: 99%;
   /* height: 65px; */
   height:15%;
@@ -249,7 +249,7 @@ div.resultLineItem{
   border-radius:10px;
   background-color:rgba(245,245,245, 0.85);
   font-family: 'Boogaloo';
-  font-size:23px;
+  font-size:25px;
 }
 
 .resultLineItem:hover{
@@ -261,7 +261,7 @@ div.resultLineItem{
   margin:auto;
   text-align: center;
   border-style: solid;
-  padding: 2px 2px 10px 2px;
+  padding: 0 2px 0 2px;
   width: 99%;
   /* height: 65px; */
   margin-top: 10px;
@@ -270,7 +270,7 @@ div.resultLineItem{
   border-color:  rgb(45, 47, 71);
   border-radius:10px;
   font-family: 'Boogaloo';
-  font-size:25px;
+  font-size:28px;
 }
 
 .window{
@@ -707,7 +707,6 @@ div.resultLineItem{
 
 .title{
   position: absolute;
-  left: 6px;
   margin: 0.6% 0 0 6%;
   font-family: 'Lobster';
   font-weight: bold;
