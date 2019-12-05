@@ -319,7 +319,7 @@ div.resultLineItem{
 }
 
 .linkTo{
-  margin-top: -2.35%;
+  margin-top: -1.75%;
   margin-right: 1%;
   float:right;
   text-decoration: none;
@@ -667,14 +667,14 @@ div.resultLineItem{
 .mapContainer{
   height:100%;
   width:100%;
-  margin-top:4%;
+  margin-top:4.8%;
 }
 
 .mapBtn {
   position: absolute;
   display: block;
-  top: 17%;
-  left: 5%;
+  top: 13%;
+  left: 4%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   font-size: 15px;
@@ -731,4 +731,17 @@ div.resultLineItem{
 
 .disabledLogo:hover{
   cursor: default;
+}
+
+.gm-style-iw{
+  font-size: 17px !important;
+  text-align:center !important;
+  padding-top:0 !important;
+  font-family: 'Boogaloo' !important;
+}
+
+.gm-style-iw h4{
+  font-size: 22px !important;
+  font-variant: small-caps !important;
+  margin: 15px 0 0 0 !important;
 }
