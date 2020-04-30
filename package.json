@@ -6,7 +6,7 @@
     "@material-ui/core": "^4.6.1",
     "google-maps-react": "^2.0.2",
     "google-react-maps": "^1.5.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "jquery-ui": "^1.12.1",
     "leaflet": "^1.6.0",
     "leaflet-defaulticon-compatibility": "^0.1.1",
