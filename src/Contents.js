@@ -1,6 +1,6 @@
 import React from 'react';
 import MainContainer from './MainContainer'
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import Signup from './Signup'
 import Login from './Login'
 import Profile from './Profile'
@@ -118,7 +118,22 @@ export default class Contents extends React.Component{
             <div >
                 <div>
                     <Switch>
-                    <Route exact path='/' />
+                    <Route exact path='/' 
+                        render={(routerProps) => 
+                            <MainContainer 
+                                {...routerProps} 
+                                currentUser={this.props.currentUser} 
+                                handleErrors={this.handleErrors}
+                                savedVenues={this.state.savedVenues}
+                                handleSaveVenue={this.handleSaveVenue}
+                                toggleMap={this.toggleMap}
+                                handleProfileDelete={this.handleProfileDelete}
+                                map={this.map}
+                                showMap={this.state.showMap}
+                                toggleDisableNav={this.props.toggleDisableNav}
+                            />
+                        }
+                    />
                     <Route exact path='/signup' 
                         render={(routerProps) => 
                         <Signup 
@@ -135,22 +150,6 @@ export default class Contents extends React.Component{
                             setUser={this.props.setUser} 
                             handleErrors={this.handleErrors}
                             fetchSavedVenues={this.fetchSavedVenues}
-                        /> 
-                        } 
-                    />
-                    <Route exact path='/main' 
-                        render={(routerProps) => 
-                        <MainContainer 
-                            {...routerProps} 
-                            currentUser={this.props.currentUser} 
-                            handleErrors={this.handleErrors}
-                            savedVenues={this.state.savedVenues}
-                            handleSaveVenue={this.handleSaveVenue}
-                            toggleMap={this.toggleMap}
-                            handleProfileDelete={this.handleProfileDelete}
-                            map={this.map}
-                            showMap={this.state.showMap}
-                            toggleDisableNav={this.props.toggleDisableNav}
                         /> 
                         } 
                     />

@@ -6,7 +6,7 @@
     "@material-ui/core": "^4.6.1",
     "google-maps-react": "^2.0.2",
     "google-react-maps": "^1.5.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.1",
     "jquery-ui": "^1.12.1",
     "leaflet": "^1.6.0",
     "leaflet-defaulticon-compatibility": "^0.1.1",
@@ -17,7 +17,8 @@
     "react-leaflet": "^2.6.0",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.2.0"
+    "react-scripts": "^3.4.1",
+    "surge": "^0.21.3"
   },
   "scripts": {
     "start": "react-scripts start",

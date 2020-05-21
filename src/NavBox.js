@@ -7,7 +7,7 @@ function NavBox(props){
 
     return(
         <div className='nav-box'>
-            <Link to={props.toggleNav ? null :'/main'} className={props.toggleNav ? 'disabledLogo' :'logo'} ><img src={logo} /> </Link>
+            <Link to={props.toggleNav ? null :'/'} className={props.toggleNav ? 'disabledLogo' :'logo'} ><img src={logo} /> </Link>
             <div className='title' ><span className='titleRed'>Better</span><span className='titleWhite'>ThingsTo</span><span className='titleRed'>Do</span></div>
             {props.currentUser?
                 <>
