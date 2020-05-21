@@ -4,8 +4,6 @@ import foursquare from './assets/powered-by-foursquare-white.png'
 export default class ProfileVenueInfoCard extends Component{
 
     render() {
-        // console.log(this.props.selectedLineItem)
-        // console.log(this.props.selectedLineItemInfo)
         return(
             <div className='popup' >
                 <div className='popup\_inner'>
@@ -29,7 +27,6 @@ export default class ProfileVenueInfoCard extends Component{
                                             :
                                             ' No ratings'
                                         }
-                                        {/* rating */}
                                     </p>
 
                                 </div>
@@ -40,7 +37,6 @@ export default class ProfileVenueInfoCard extends Component{
                                             :
                                             'No Description'
                                         }
-                                        {/* description */}
                                     </p>
                                 </div>
                                 <div className='venueInfo' >
@@ -51,7 +47,6 @@ export default class ProfileVenueInfoCard extends Component{
                                             :
                                             ' N/A'
                                         }
-                                        {/* phone number */}
                                     </p>
 
                                     <p>Days Open:&nbsp;
@@ -60,7 +55,6 @@ export default class ProfileVenueInfoCard extends Component{
                                             :
                                             ' N/A'
                                         } 
-                                        {/* days */}
                                     </p>
 
                                     <p>Hours:&nbsp;
@@ -69,7 +63,6 @@ export default class ProfileVenueInfoCard extends Component{
                                             :
                                             ' N/A'
                                         } 
-                                        {/* hours */}
                                     </p>
                                     
                                     <p>Price Tier:&nbsp;
@@ -78,7 +71,6 @@ export default class ProfileVenueInfoCard extends Component{
                                             :
                                             ' N/A'
                                         } 
-                                        {/* price */}
                                     </p>
                                 </div>
                             </div>

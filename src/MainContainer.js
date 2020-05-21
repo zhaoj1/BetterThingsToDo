@@ -99,7 +99,6 @@ export default class MainContainer extends Component{
     render() {
         return(
           <div className='MainContainer'>
-            {/* {console.log(this.state.firstSearchResults)} */}
             {this.state.page === 'search' ? 
               < SearchBox 
                 handleAddressInputChange={this.handleAddressInputChange} 

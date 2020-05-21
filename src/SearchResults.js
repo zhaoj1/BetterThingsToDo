@@ -25,19 +25,6 @@ export default class SearchResults extends Component{
     }
 
     calculateMidpoint = (firstAddress, secondAddress) => {
-        // let midptLat = this.degToRads(firstAddress.lat - secondAddress.lat)
-        // let midptLng = this.degToRads(firstAddress.lng - secondAddress.lng)
-        // let distance = 
-        //     Math.sin(midptLat/2) ** 2 +
-        //     Math.cos(this.degToRads(firstAddress.lat)) * Math.cos(this.degToRads(secondAddress.lat)) *
-        //     Math.sin(midptLng/2) ** 2
-        // let midpointResult = 2 * Math.atan2(Math.sqrt(distance), Math.sqrt(1-distance))
-        // return midpointResult
-        //-------------------------------------------------------//
-        // ny lat: 40.7127281, lng: -74.0060152
-        // nj lat: 40.0757384, lng: -74.4041622
-        // "midpoint" lat: 40.39423325, lng: -74.2050887
-        //-------------------------------------------------------//
         let lat1 = this.degToRads(firstAddress.lat);
         let lat2 = this.degToRads(secondAddress.lat);
         let lng1 = this.degToRads(firstAddress.lng);
@@ -54,12 +41,6 @@ export default class SearchResults extends Component{
         this.setState({
             midpoint: mdptCoor
         })
-        //-------------------------------------------------------//
-        // let mdptLat = (secondAddress.lat + firstAddress.lat)/2
-        // let mdptLng = (secondAddress.lng + firstAddress.lng)/2
-        // let mdptCoor = [mdptLat, mdptLng]
-        // // return mdptCoor
-        // console.log(mdptCoor)
     }
 
     degToRads = (deg) => {
@@ -94,22 +75,6 @@ export default class SearchResults extends Component{
 
     }
 
-    // fetchVenues = () => {
-    //     // console.log(this.state.midpoint)
-    //     fetch('https://api.foursquare.com/v2/venues/explore?client_id=' + process.env.REACT_APP_CLIENTID + '&client_secret=' + process.env.REACT_APP_CLIENTSECRET + `&v=20180323&limit=20&near=${this.state.midpoint[0]},${this.state.midpoint[1]}`)
-    //     .then(resp => resp.json())
-    //     .then(data => this.props.setRecommendations(data.response.groups[0].items))
-    //     .catch(error => {
-    //         throw(error)
-    //       })
-    // }
-
-    // fetchCategories = () => {
-    //     fetch('https://api.foursquare.com/v2/venues/categories?client_id=' + process.env.REACT_APP_CLIENTID + '&client_secret=' + process.env.REACT_APP_CLIENTSECRET + `&v=20180323` )
-    //     .then(resp => resp.json())
-    //     .then(console.log)
-    // }
-
     handleResultSelect = (event) => {
         if(event.target.id === 'firstSelected'){
             this.setState({
@@ -135,7 +100,7 @@ export default class SearchResults extends Component{
         // console.log(this.props.recommendedList)
         // console.log(this.state.midpoint)
         // console.log(this.state.selectedCategory)
-        
+
         return(
             <div>              
                 <div className='searchResultsMajorDiv'>

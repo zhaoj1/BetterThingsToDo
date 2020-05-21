@@ -7,103 +7,93 @@ export default class InfoCardPopup extends Component{
         console.log(this.props.selectedLineItem)
         return(
             <div className='popup' >
-                {/* <div className='wrapper'> */}
                     <div className='popup\_inner'>
-                        {!this.props.selectedLineItemInfo === null? //dont forget to remove ( ! )
+                        {!this.props.selectedLineItemInfo === null? 
                             null
                             :
-                            // <div className='wrapper'>
-                                <div className='infoCardBorder'>
-                                    <div className='infoCard'>
-                                        <div className='venueNameLocation'>
-                                            <h1 className='infoCardVenueName'>{this.props.selectedLineItem.venue.name}</h1>
-                                            <p><a href={`https://foursquare.com/v/${this.props.selectedLineItem.venue.id}?ref=` + process.env.REACT_APP_CLIENTID} target='blank' >Click here for more info on venue</a></p>
-                                            
-                                            <label>{this.props.selectedLineItem.venue.location.formattedAddress.join(' ')}</label>
-                                        </div>
-                                        <div className='venueCategRating'>
-                                            <p>{this.props.selectedLineItem.venue.categories[0].name}</p>
-                                            
-                                            <p>Rating:&nbsp;
-                                                {this.props.selectedLineItemInfo.rating?
-                                                    this.props.selectedLineItemInfo.rating
-                                                    :
-                                                    ' No ratings'
-                                                }
-                                                {/* rating */}
-                                            </p>
-
-                                        </div>
-                                        <div className='venueDesc'>
-                                            <p>
-                                                {this.props.selectedLineItemInfo.description?
-                                                    this.props.selectedLineItemInfo.description
-                                                    :
-                                                    'No Description'
-                                                }
-                                                {/* description */}
-                                            </p>
-                                        </div>
-                                        <div className='venueInfo' >
-                                            
-                                            <p>Phone:&nbsp;
-                                                {this.props.selectedLineItemInfo.contact.formattedPhone? 
-                                                    this.props.selectedLineItemInfo.contact.formattedPhone
-                                                    :
-                                                    ' N/A'
-                                                }
-                                                {/* phone number */}
-                                            </p>
-
-                                            <p>Days Open:&nbsp;
-                                                {this.props.selectedLineItemInfo.hours? 
-                                                    this.props.selectedLineItemInfo.hours.timeframes[0].days
-                                                    :
-                                                    ' N/A'
-                                                } 
-                                                {/* days */}
-                                            </p>
-
-                                            <p>Hours:&nbsp;
-                                                {this.props.selectedLineItemInfo.hours?
-                                                    this.props.selectedLineItemInfo.hours.timeframes[0].open[0].renderedTime
-                                                    :
-                                                    ' N/A'
-                                                } 
-                                                {/* hours */}
-                                            </p>
-                                            
-                                            <p>Price Tier:&nbsp;
-                                                {this.props.selectedLineItemInfo.price?
-                                                    this.props.selectedLineItemInfo.price.currency
-                                                    :
-                                                    ' N/A'
-                                                } 
-                                                {/* price */}
-                                            </p>
-                                        </div>
+                            <div className='infoCardBorder'>
+                                <div className='infoCard'>
+                                    <div className='venueNameLocation'>
+                                        <h1 className='infoCardVenueName'>{this.props.selectedLineItem.venue.name}</h1>
+                                        <p><a href={`https://foursquare.com/v/${this.props.selectedLineItem.venue.id}?ref=` + process.env.REACT_APP_CLIENTID} target='blank' >Click here for more info on venue</a></p>
+                                        
+                                        <label>{this.props.selectedLineItem.venue.location.formattedAddress.join(' ')}</label>
                                     </div>
-                                    <br></br>
-                                    {this.props.currentUser ? 
-                                        this.props.list == 'recommended' ?
-                                            <button className='buttons' onClick={this.props.handleSaveBtn}>Save</button> 
-                                            : 
-                                            <button className='buttons' onClick={this.props.handleDeleteBtn} >Remove from Saved</button> 
-                                        :null
-                                    }
-                                    <button 
-                                        className='buttons' 
-                                        onClick={this.props.handleBackBtn} 
-                                        ref={this.props.infoCardBackBtn}
-                                        style={{'margin':'0 0 5px 0'}}
-                                    >Back</button>
-                                    <br></br>
-                                    <img src={foursquare} width='200px' style={{'margin-top':10}} />
+                                    <div className='venueCategRating'>
+                                        <p>{this.props.selectedLineItem.venue.categories[0].name}</p>
+                                        
+                                        <p>Rating:&nbsp;
+                                            {this.props.selectedLineItemInfo.rating?
+                                                this.props.selectedLineItemInfo.rating
+                                                :
+                                                ' No ratings'
+                                            }
+                                        </p>
+
+                                    </div>
+                                    <div className='venueDesc'>
+                                        <p>
+                                            {this.props.selectedLineItemInfo.description?
+                                                this.props.selectedLineItemInfo.description
+                                                :
+                                                'No Description'
+                                            }
+                                        </p>
+                                    </div>
+                                    <div className='venueInfo' >
+                                        
+                                        <p>Phone:&nbsp;
+                                            {this.props.selectedLineItemInfo.contact.formattedPhone? 
+                                                this.props.selectedLineItemInfo.contact.formattedPhone
+                                                :
+                                                ' N/A'
+                                            }
+                                        </p>
+
+                                        <p>Days Open:&nbsp;
+                                            {this.props.selectedLineItemInfo.hours? 
+                                                this.props.selectedLineItemInfo.hours.timeframes[0].days
+                                                :
+                                                ' N/A'
+                                            } 
+                                        </p>
+
+                                        <p>Hours:&nbsp;
+                                            {this.props.selectedLineItemInfo.hours?
+                                                this.props.selectedLineItemInfo.hours.timeframes[0].open[0].renderedTime
+                                                :
+                                                ' N/A'
+                                            } 
+                                        </p>
+                                        
+                                        <p>Price Tier:&nbsp;
+                                            {this.props.selectedLineItemInfo.price?
+                                                this.props.selectedLineItemInfo.price.currency
+                                                :
+                                                ' N/A'
+                                            } 
+                                        </p>
+                                    </div>
                                 </div>
-                            // </div>
+                                <br></br>
+                                {this.props.currentUser ? 
+                                    this.props.list == 'recommended' ?
+                                        <button className='buttons' onClick={this.props.handleSaveBtn}>Save</button> 
+                                        : 
+                                        <button className='buttons' onClick={this.props.handleDeleteBtn} >Remove from Saved</button> 
+                                    :null
+                                }
+                                <button 
+                                    className='buttons' 
+                                    onClick={this.props.handleBackBtn} 
+                                    ref={this.props.infoCardBackBtn}
+                                    style={{'margin':'0 0 5px 0'}}
+                                >Back</button>
+                                <br></br>
+                                <img src={foursquare} width='200px' style={{'margin-top':10}} />
+                            </div>
                         }
                     </div>
-                {/* </div> */}
             </div>         
         )
     }
