@@ -16,7 +16,7 @@ export default class Login extends Component{
     handleSubmit = (e) => {
         e.preventDefault()
     
-        fetch(`http://localhost:3000/login`,{
+        fetch(`https://better-things-to-do-backend.herokuapp.com/login`,{
           method: "POST",
           headers: {
             "Content-Type": "application/json",

@@ -19,7 +19,7 @@ export default class Signup extends Component{
         e.preventDefault()
   
         if(this.state.password === this.state.passwordConfirm){
-          fetch(`http://localhost:3000/signup`, {
+          fetch(`https://better-things-to-do-backend.herokuapp.com/signup`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

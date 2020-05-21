@@ -46,8 +46,6 @@ export default class Profile extends Component{
             this.props.currentUser?
             <>
                 <div className='wrapper'>
-                    {console.log('state',this.state)}
-                    {console.log('props',this.props)}
                     <div className='profilePage'>
                         <div className='profile'>
                             <div className='userInfo'>

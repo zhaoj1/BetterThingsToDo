@@ -22,7 +22,6 @@ export default class Contents extends React.Component{
         this.handleErrorBackBtn = this.handleErrorBackBtn.bind(this);
         this.handleSaveVenue = this.handleSaveVenue.bind(this);
         this.toggleMap=this.toggleMap.bind(this);
-        this.handleDeleteVenue=this.handleDeleteVenue.bind(this);
         this.handleProfileDelete=this.handleProfileDelete.bind(this);
 
         this.errorMsgBtn = React.createRef();
@@ -70,7 +69,7 @@ export default class Contents extends React.Component{
       }
     
       fetchSavedVenues = () => {
-        fetch(`http://localhost:3000/activities`)
+        fetch(`https://better-things-to-do-backend.herokuapp.com//activities`)
         .then(resp => resp.json())
         .then(data => this.setState({
                 savedVenues: data
@@ -79,7 +78,7 @@ export default class Contents extends React.Component{
       }
     
     handleSaveVenue(venue){
-        fetch(`http://localhost:3000/activities`, {
+        fetch(`https://better-things-to-do-backend.herokuapp.com/activities`, {
             method: "POST",
             headers: {
             "Content-Type": "application/json",
@@ -97,15 +96,8 @@ export default class Contents extends React.Component{
         .then(() => this.fetchSavedVenues())
     }
 
-    handleDeleteVenue = (venue) => {
-        fetch(`http://localhost:3000/activities/${this.state.savedVenues.find(savedVenue => savedVenue.venue_api_id === venue.venue.id && savedVenue.user_id === this.props.currentUser.id).id}`, {
-            method: "DELETE"
-        })
-        .then(() => this.fetchSavedVenues())  
-    }
-
     handleProfileDelete = (selectedVenue) => {
-        fetch(`http://localhost:3000/activities/${selectedVenue.id}`, {
+        fetch(`https://better-things-to-do-backend.herokuapp.com/activities/${selectedVenue.id}`, {
             method: "DELETE"
         })
         .then(() => this.fetchSavedVenues())  
@@ -155,7 +147,7 @@ export default class Contents extends React.Component{
                             savedVenues={this.state.savedVenues}
                             handleSaveVenue={this.handleSaveVenue}
                             toggleMap={this.toggleMap}
-                            handleDeleteVenue={this.handleDeleteVenue}
+                            handleProfileDelete={this.handleProfileDelete}
                             map={this.map}
                             showMap={this.state.showMap}
                             toggleDisableNav={this.props.toggleDisableNav}

@@ -7,7 +7,8 @@ export default class ProfileVenueInfoCard extends Component{
         return(
             <div className='popup' >
                 <div className='popup\_inner'>
-                    {!this.props.selectedLineItemInfo === null? //dont forget to remove ( ! )
+                    {console.log(this.props)}
+                    {!this.props.selectedLineItemInfo === null? 
                         null
                         :
                         <div className='infoCardBorder'>

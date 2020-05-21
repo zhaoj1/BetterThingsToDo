@@ -75,7 +75,7 @@ export default class ReturnedQueries extends Component{
     }
 
     handleDeleteBtn = () => {
-        this.props.handleDeleteVenue(this.state.selectedLineItem)
+        this.props.handleProfileDelete(this.state.selectedLineItem)
         this.handleBackBtn()
     }
 
@@ -176,7 +176,6 @@ export default class ReturnedQueries extends Component{
                             list={this.state.list}
                             handleSaveBtn={this.handleSaveBtn}
                             infoCardBackBtn={this.infoCardBackBtn}
-                            handleDeleteBtn={this.handleDeleteBtn}
                         />
                         :
                         <ProfileVenueInfoCard

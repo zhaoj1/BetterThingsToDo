@@ -123,7 +123,7 @@ export default class MainContainer extends Component{
                   handleErrors={this.props.handleErrors}
                   savedVenues={this.props.savedVenues}
                   handleSaveVenue={this.props.handleSaveVenue}
-                  handleDeleteVenue={this.props.handleDeleteVenue}
+                  handleProfileDelete={this.props.handleProfileDelete}
                   toggleMap={this.props.toggleMap}
                   map={this.props.map}
                   showMap={this.props.showMap}
