@@ -27,13 +27,10 @@ export default class Login extends Component{
         .then(res => res.json())
         .then(response => {
           if (response.errors){
-            // alert('Username or Password incorrect')
             this.props.handleErrors(['Username or password is incorrect.'])
           } else {
             this.props.setUser(response.user)
             this.props.fetchSavedVenues()
-            // localStorage.token = response.token
-            // localStorage.setItem('token', response.token)
             this.props.history.push('./main')
           }
         })

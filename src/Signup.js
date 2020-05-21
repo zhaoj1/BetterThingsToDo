@@ -13,14 +13,12 @@ export default class Signup extends Component{
         this.setState({
             [event.target.name]: event.target.value
         })
-        // console.log(event.target.name, event.target.value)
     }
 
     handleSubmit = (e) => {
         e.preventDefault()
   
         if(this.state.password === this.state.passwordConfirm){
-            // console.log(this.state.password)
           fetch(`http://localhost:3000/signup`, {
             method: "POST",
             headers: {
@@ -36,12 +34,9 @@ export default class Signup extends Component{
             .then(response => {
               if (response.errors){
                 this.props.handleErrors(response.errors)
-                // console.log(response.errors)
               } else {
                 this.props.setUser(response.user)
-                localStorage.token = response.token
                 this.props.history.push('/main')
-                // console.log(localStorage.token)
               }
             })
         } else {
@@ -50,7 +45,6 @@ export default class Signup extends Component{
       }
 
     render(){
-        // console.log(this.state)
         return(
             <div className='wrapper'>
                 <div className='signup'>

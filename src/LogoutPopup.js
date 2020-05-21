@@ -2,11 +2,6 @@ import React, {Component} from 'react';
 
 export default class ErrorPopup extends Component{
 
-    // constructor(){
-    //     super();
-    //     this.logoutMsg = React.createRef();
-    // }
-
     render() {
         return(
                 <div className='popup' >

@@ -134,7 +134,8 @@ export default class SearchResults extends Component{
         // console.log(this.state.categories)
         // console.log(this.props.recommendedList)
         // console.log(this.state.midpoint)
-        console.log(this.state.selectedCategory)
+        // console.log(this.state.selectedCategory)
+        
         return(
             <div>              
                 <div className='searchResultsMajorDiv'>

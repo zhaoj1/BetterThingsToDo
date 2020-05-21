@@ -15,15 +15,11 @@ export default class Profile extends Component{
         this.handleBackBtn=this.handleBackBtn.bind(this)
     }
 
-    fetchVenueInfo = () => { // commented out to save on API calls
-        fetch(`https://api.foursquare.com/v2/venues/${this.state.selectedLineItem.venue_api_id}?&client_id=` + process.env.REACT_APP_CLIENTID + '&client_secret=' + process.env.REACT_APP_CLIENTSECRET +'&v=20180323')
+    fetchVenueInfo = async () => { //quoted out to save on API calls
+        let venueInfo = await fetch(`https://api.foursquare.com/v2/venues/${this.state.selectedLineItem.venue_api_id}?&client_id=` + process.env.REACT_APP_CLIENTID + '&client_secret=' + process.env.REACT_APP_CLIENTSECRET +'&v=20180323')
         .then(resp => resp.json())
-        .then(data => this.setState({
-            selectedLineItemInfo: data.response.venue
-        }))
-        .catch(error => {
-            throw(error)
-          })
+
+        if(venueInfo){this.setState({selectedLineItemInfo: venueInfo.response.venue})}
     }
 
     handleQuerySelect = (event, list) => { // commented out to save on API calls
@@ -41,23 +37,22 @@ export default class Profile extends Component{
     }
 
     handleDeleteBtn= () => {
-        // console.log(this.state.selectedLineItem)
         this.props.handleProfileDelete(this.state.selectedLineItem)
         this.handleBackBtn()
     }
 
     render() {
-        // console.log(this.props)
-        // console.log(this.state.selectedLineItem)
         return(
             this.props.currentUser?
             <>
                 <div className='wrapper'>
+                    {console.log('state',this.state)}
+                    {console.log('props',this.props)}
                     <div className='profilePage'>
                         <div className='profile'>
                             <div className='userInfo'>
                                 <p className='username'>{this.props.currentUser.username}</p>
-                                <img className='profilepic' src='http://sunfieldfarm.org/wp-content/uploads/2014/02/profile-placeholder.png' height='120' width='120' />
+                                {/* <img className='profilepic' src='http://sunfieldfarm.org/wp-content/uploads/2014/02/profile-placeholder.png' height='120' width='120' /> */}
                                 <br></br>
                                 {this.props.savedVenues.filter(venue => venue.user_id === this.props.currentUser.id).length === 0 ? 
                                     null
@@ -83,18 +78,19 @@ export default class Profile extends Component{
                     </div>
                 </div>    
                 {this.state.selectedLineItemInfo?
-                    <ProfileVenueInfoCard 
-                        selectedLineItem={this.state.selectedLineItem} 
-                        selectedLineItemInfo={this.state.selectedLineItemInfo} 
-                        handleBackBtn={this.handleBackBtn} 
-                        currentUser={this.props.currentUser}
-                        fetchVenueInfo={this.fetchVenueInfo}
-                        handleDeleteBtn={this.handleDeleteBtn}
-                    />
+                    <>
+                        <ProfileVenueInfoCard 
+                            selectedLineItem={this.state.selectedLineItem} 
+                            selectedLineItemInfo={this.state.selectedLineItemInfo} 
+                            handleBackBtn={this.handleBackBtn} 
+                            currentUser={this.props.currentUser}
+                            fetchVenueInfo={this.fetchVenueInfo}
+                            handleDeleteBtn={this.handleDeleteBtn}
+                        />
+                    </>
                     :
                     null
                 }
-
             </>
             :
             <>

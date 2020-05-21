@@ -55,13 +55,7 @@ export default class Contents extends React.Component{
       }
 
       componentDidUpdate(prevProps, prevState){
-        //   console.log(prevProps)
-        //   console.log(this.props)
         if(this.props.currentUser !== prevProps.currentUser && this.props.currentUser !== null){
-            // this.setState({
-            //     savedVenues: []
-            // })
-            // setTimeout(this.fetchSavedVenues(), 1000)
             this.fetchSavedVenues()
             this.setState({
                 savedVenues: this.state.savedVenues.filter(venue => venue.user_id === this.props.currentUser)
@@ -78,41 +72,13 @@ export default class Contents extends React.Component{
       fetchSavedVenues = () => {
         fetch(`http://localhost:3000/activities`)
         .then(resp => resp.json())
-        .then(data => 
-            // data.length === 0 ?
-            //     []
-            //     :
-            //     data.length === 1 ?
-            //         data[0].user_id === this.props.currentUser.id ? 
-            //         this.setState({
-            //             savedVenues: data[0]
-            //         }) 
-            //         :
-            //         []
-            //     :
-            //     this.setState({
-            //         savedVenues: data.filter(activity => activity.user_id === this.props.currentUser.id)
-            //     })
-
-            // data.length > 0?
-            //     data.filter(activity => activity.user_id === this.props.currentUser.id).length > 0?
-            //         this.setState({
-            //             // savedVenues: data
-            //             savedVenues: data.filter(activity => activity.user_id === this.props.currentUser.id)
-            //         })
-            //         :
-            //         null
-            //     :
-            //     null
-
-            this.setState({
+        .then(data => this.setState({
                 savedVenues: data
             })
           )
       }
     
     handleSaveVenue(venue){
-    //   console.log(venue)
         fetch(`http://localhost:3000/activities`, {
             method: "POST",
             headers: {
@@ -132,7 +98,6 @@ export default class Contents extends React.Component{
     }
 
     handleDeleteVenue = (venue) => {
-        // console.log(this.state.savedVenues.find(savedVenue => savedVenue.venue_api_id === venue.venue.id && savedVenue.user_id === this.props.currentUser.id).id)
         fetch(`http://localhost:3000/activities/${this.state.savedVenues.find(savedVenue => savedVenue.venue_api_id === venue.venue.id && savedVenue.user_id === this.props.currentUser.id).id}`, {
             method: "DELETE"
         })
@@ -157,10 +122,6 @@ export default class Contents extends React.Component{
     }
 
     render(){
-        // console.log(this.state.errorMessage)
-        // console.log(this.props.currentUser)
-        // console.log(this.state.savedVenues)
-        // console.log(this.props)
         return(
             <div >
                 <div>
@@ -191,7 +152,6 @@ export default class Contents extends React.Component{
                             {...routerProps} 
                             currentUser={this.props.currentUser} 
                             handleErrors={this.handleErrors}
-                            // savedVenues={this.state.savedVenues.filter(venue => venue.user_id === this.props.currentUser.id)}
                             savedVenues={this.state.savedVenues}
                             handleSaveVenue={this.handleSaveVenue}
                             toggleMap={this.toggleMap}
@@ -207,7 +167,6 @@ export default class Contents extends React.Component{
                         <Profile 
                             {...routerProps} 
                             currentUser={this.props.currentUser} 
-                            // savedVenues={this.state.savedVenues.filter(venue => venue.user_id === this.props.currentUser.id)}
                             savedVenues={this.state.savedVenues}
                             fetchSavedVenues={this.fetchSavedVenues}
                             handleProfileDelete={this.handleProfileDelete}

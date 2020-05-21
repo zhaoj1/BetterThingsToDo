@@ -38,7 +38,6 @@ export default class App extends React.Component{
       toggleNav: !this.state.toggleNav
     })
     this.props.history.push('./login')
-    // setTimeout(() => alert('Successfully Logged Out'), 200)
   }  
 
   componentDidUpdate(){
@@ -54,29 +53,7 @@ export default class App extends React.Component{
     })
   }
 
-  
-
-  // componentDidMount = () => {
-  //   if(localStorage.token){
-  //     fetch(`http://localhost:3000/auto_login`,{
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         'Accept': "application/json",
-  //         'Authorization': localStorage.token
-  //       },
-  //     })
-  //     .then(resp => resp.json())
-  //     .then(response => {
-  //       // console.log(response.user)
-  //       this.setState({
-  //         currentUser: response.user
-  //       })
-  //     })
-  //   }
-  // }
-
   render(){
-    // console.log(this.state.currentUser)
     return(
       <div className='appWindow'>
         <div className='window' >

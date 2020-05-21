@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import foursquare from './assets/powered-by-foursquare-blue.png'
 
 export default class ErrorPopup extends Component{
 

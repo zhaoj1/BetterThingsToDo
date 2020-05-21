@@ -9,7 +9,6 @@ const mapStyles = {
 
 let bounds = []
 
-// export default class MapContainer extends React.Component{
 class MapContainer extends React.Component{
     
     state = {
@@ -47,19 +46,9 @@ class MapContainer extends React.Component{
         return(
             <div className='wrapper' style={{'height':'100%'}}>
                 <div className='mapContainer'>
-                    {/* <iframe 
-                        className='map'
-                        width="100%" 
-                        height="100%" 
-                        frameborder="0" 
-                        src={mapsrc}
-                        allowfullscreen>
-                    </iframe> */}
-
                     <Map
                         google={this.props.google}
                         zoom={15}
-                        // style={mapStyles}
                         zoomControl={false}
                         mapTypeControl={false}
                         styles={[
@@ -387,11 +376,6 @@ class MapContainer extends React.Component{
                         ref={this.props.map}
                         
                     >
-                    {/* <Marker
-                        onClick={this.onMarkerClick}
-                        name={'Flatiron School'}
-                        position={{lat: 40.7052529, lng: -74.0146175}}
-                    /> */}
                     {this.props.savedVenues.length !== 0?
                         this.props.savedVenues.map(venue =>
                             <Marker
@@ -423,10 +407,6 @@ class MapContainer extends React.Component{
         )
     }
 }
-
-// export default GoogleApiWrapper({
-//     // apiKey: process.env.REACT_APP_GOOGLE
-//   })(MapContainer);
 
 export default GoogleApiWrapper(
     (props) => ({

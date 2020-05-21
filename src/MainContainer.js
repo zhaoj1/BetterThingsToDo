@@ -20,8 +20,6 @@ export default class MainContainer extends Component{
         this.handleBackBtn = this.handleBackBtn.bind(this)
         this.setRecommendations = this.setRecommendations.bind(this)
         this.handleRecommendationsBack = this.handleRecommendationsBack.bind(this)
-        // this.setErrorMessage = this.setErrorMessage.bind(this)
-        // this.removeErrorMessage = this.removeErrorMessage.bind(this)
     
         this.state = {
           firstAddress: null,
@@ -31,7 +29,6 @@ export default class MainContainer extends Component{
           page: 'search',
           recommendedVenues: [],
           loading: true,
-          // errorMessage: null
         }
       }
     
@@ -68,7 +65,7 @@ export default class MainContainer extends Component{
           this.setState({
             firstSearchResults: data.results, // .annotations.geometry. {lat/lng}
             loading: false
-          })  
+          })
         )
         .catch(error => {
           {throw(error)}
@@ -91,12 +88,6 @@ export default class MainContainer extends Component{
         })
     
       }
-    
-      // componentDidMount(){
-      //   fetch('https://api.foursquare.com/v2/venues/explore?client_id=' + process.env.REACT_APP_CLIENTID + '&client_secret=' + process.env.REACT_APP_CLIENTSECRET+ `&v=20180323&limit=1&ll=${this.state.longitude},${this.state.latitude}&query=${this.state.query}`)
-      //   .then(resp => resp.json())
-      //   .then(console.log)
-      // }
 
       setRecommendations = (queryResults) => {
         this.setState({
@@ -104,24 +95,11 @@ export default class MainContainer extends Component{
           page: 'suggestions'
         })
       }
-
-      // setErrorMessage = (error) => {
-      //   this.setState({
-      //     errorMessage: error
-      //   })
-      // }
-
-      // removeErrorMessage = () => {
-      //   this.setState({
-      //     errorMessage: null
-      //   })
-      // }
     
     render() {
-      // console.log(this.state.firstSearchResults)
-      // console.log(this.state.secondSearchResults)
         return(
           <div className='MainContainer'>
+            {/* {console.log(this.state.firstSearchResults)} */}
             {this.state.page === 'search' ? 
               < SearchBox 
                 handleAddressInputChange={this.handleAddressInputChange} 
