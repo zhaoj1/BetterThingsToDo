@@ -69,7 +69,7 @@ export default class Contents extends React.Component{
       }
     
       fetchSavedVenues = () => {
-        fetch(`https://better-things-to-do-backend.herokuapp.com//activities`)
+        fetch(`https://better-things-to-do-backend.herokuapp.com/activities`)
         .then(resp => resp.json())
         .then(data => this.setState({
                 savedVenues: data

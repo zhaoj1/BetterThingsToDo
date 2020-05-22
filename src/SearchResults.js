@@ -94,13 +94,6 @@ export default class SearchResults extends Component{
     }
 
     render() {
-        // console.log(this.props.firstSearchResults)
-        // console.log(this.props.secondSearchResults)
-        // console.log(this.state.categories)
-        // console.log(this.props.recommendedList)
-        // console.log(this.state.midpoint)
-        // console.log(this.state.selectedCategory)
-
         return(
             <div>              
                 <div className='searchResultsMajorDiv'>

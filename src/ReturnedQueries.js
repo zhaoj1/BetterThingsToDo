@@ -23,11 +23,10 @@ export default class ReturnedQueries extends Component{
             list: null,
             showRecommendedMap:false,
             firstLineItem: 0
-            // savedVenues: null
         }
     }
 
-    fetchVenueInfo = async (id) => { //quoted out to save on API calls
+    fetchVenueInfo = async (id) => { 
         let venueInfo = await fetch(`https://api.foursquare.com/v2/venues/${id}?&client_id=` + process.env.REACT_APP_CLIENTID + '&client_secret=' + process.env.REACT_APP_CLIENTSECRET +'&v=20180323')
         .then(resp => resp.json())
         
