@@ -16,7 +16,7 @@ export default class Login extends Component{
     handleSubmit = (e) => {
         e.preventDefault()
     
-        fetch(`https://better-things-to-do-backend.herokuapp.com/login`,{
+        fetch(`https://www.better-things-to-do-backend.herokuapp.com/login`,{
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -31,7 +31,7 @@ export default class Login extends Component{
           } else {
             this.props.setUser(response.user)
             this.props.fetchSavedVenues()
-            this.props.history.push('./main')
+            this.props.history.push('/')
           }
         })
 

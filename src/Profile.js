@@ -92,7 +92,7 @@ export default class Profile extends Component{
             </>
             :
             <>
-                {this.props.history.push('/main')}
+                {this.props.history.push('/')}
             </>
         )
     }
