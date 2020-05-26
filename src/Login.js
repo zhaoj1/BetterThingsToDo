@@ -16,7 +16,7 @@ export default class Login extends Component{
     handleSubmit = (e) => {
         e.preventDefault()
     
-        fetch(`https://www.better-things-to-do-backend.herokuapp.com/login`,{
+        fetch(`https://better-things-to-do-backend.herokuapp.com/login`,{
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -26,6 +26,7 @@ export default class Login extends Component{
         })
         .then(res => res.json())
         .then(response => {
+        console.log(response)
           if (response.errors){
             this.props.handleErrors(['Username or password is incorrect.'])
           } else {
