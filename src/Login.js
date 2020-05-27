@@ -4,7 +4,8 @@ export default class Login extends Component{
 
     state = {
         username: '',
-        password: ''
+        password: '',
+        isLoading: false
     }
 
     handleChange = (event) => {
@@ -30,6 +31,7 @@ export default class Login extends Component{
           if (response.errors){
             this.props.handleErrors(['Username or password is incorrect.'])
           } else {
+            this.setState({isLoading: true})
             this.props.setUser(response.user)
             this.props.fetchSavedVenues()
             this.props.history.push('/')
@@ -37,6 +39,7 @@ export default class Login extends Component{
         })
 
         this.props.setUser();
+        this.setState({isLoading: false});
     }
 
     render(){
@@ -45,26 +48,32 @@ export default class Login extends Component{
                 <div className='login'>
                     <form className='loginForm' onSubmit={this.handleSubmit} >
                         <h3 className='inputHeader'>Login</h3>
-                        <input 
-                            type='text' 
-                            name='username' 
-                            placeholder='Username' 
-                            className='input'
-                            value={this.state.username} 
-                            onChange={this.handleChange}
-                            required
-                        ></input>
-                        <input 
-                            type='password' 
-                            name='password' 
-                            placeholder='Password' 
-                            className='input'
-                            value={this.state.password} 
-                            onChange={this.handleChange}
-                            required
-                        ></input>
-                            <br></br>
-                        <input className='buttons' type='submit' value="Login"></input>
+                        {this.state.isLoading ? 
+                            <p>Loading...</p>
+                            :
+                            <>
+                                <input 
+                                    type='text' 
+                                    name='username' 
+                                    placeholder='Username' 
+                                    className='input'
+                                    value={this.state.username} 
+                                    onChange={this.handleChange}
+                                    required
+                                ></input>
+                                <input 
+                                    type='password' 
+                                    name='password' 
+                                    placeholder='Password' 
+                                    className='input'
+                                    value={this.state.password} 
+                                    onChange={this.handleChange}
+                                    required
+                                ></input>
+                                    <br></br>
+                                <input className='buttons' type='submit' value="Login"></input>
+                            </>
+                        }
                     </form>
                 </div>
             </div>
