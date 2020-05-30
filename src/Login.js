@@ -27,7 +27,6 @@ export default class Login extends Component{
         })
         .then(res => res.json())
         .then(response => {
-        console.log(response)
           if (response.errors){
             this.props.handleErrors(['Username or password is incorrect.'])
           } else {

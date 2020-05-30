@@ -55,10 +55,13 @@ export default class ReturnedQueries extends Component{
                 list: list
             }, () => {this.fetchVenueInfo(this.state.selectedLineItem.venue.id)})
             :
-            this.setState({
-                selectedLineItem: this.props.savedVenues.find(venue => venue.venue_name === event.target.innerText),
-                list: list
-            }, () => {this.fetchVenueInfo(this.state.selectedLineItem.venue_api_id)})
+            this.state.selectedLineItem == undefined ? 
+                this.props.handleErrors(['Please wait a moment and try again.'])
+                :
+                this.setState({
+                    selectedLineItem: this.props.savedVenues.find(venue => venue.venue_name === event.target.innerText),
+                    list: list
+                }, () => {this.fetchVenueInfo(this.state.selectedLineItem.venue_api_id)})
     }
 
     handleBackBtn = () => {
