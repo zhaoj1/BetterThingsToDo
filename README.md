@@ -4,8 +4,8 @@ BetterThingsToDo is a venue recommender that takes into account two addresses an
 
 ## Technologies
 
-React.js
-Ruby on Rails
-[FourSquare Places API](https://developer.foursquare.com/places)
-[OpenCage Geocoder API](https://opencagedata.com/)
-[Google Maps API](https://developers.google.com/maps/documentation)
+React.js    
+Ruby on Rails    
+[FourSquare Places API](https://developer.foursquare.com/places)    
+[OpenCage Geocoder API](https://opencagedata.com/)    
+[Google Maps API](https://developers.google.com/maps/documentation)    
