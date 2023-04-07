@@ -3,7 +3,6 @@
 BetterThingsToDo is a venue recommender that takes into account two addresses and finds venues that are located between them for meetups.
 
 [Backend](https://github.com/zhaoj1/BetterThingsToDoBackend)    
-[Live Link](https://better-things-to-do.surge.sh/)
 
 ## Technologies
 
